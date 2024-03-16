@@ -1,5 +1,6 @@
-package classes;
+package frames;
 
+import classes.DataBase_Connect;
 import classes.DataBase_Connect;
 import java.sql.*;
 
