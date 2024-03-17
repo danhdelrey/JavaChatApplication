@@ -4,10 +4,9 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DataBase_Connect {
+public class DatabaseConnect {
 
-    private static Connection conn;
-
+    //private static Connection conn;
     public static Connection getJDbConnection() {
 
         String url = "jdbc:mysql://localhost:3306/user";
@@ -19,12 +18,17 @@ public class DataBase_Connect {
 
             return DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DataBase_Connect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConnect.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(DataBase_Connect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
+    }
+
+    //ví dụ
+    public static boolean verifyLogin(String userName, String psw) {
+        return true;
     }
 
 //    public static void main(String[] args){

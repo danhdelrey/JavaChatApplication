@@ -106,6 +106,7 @@ public class ServerFrame extends javax.swing.JFrame {
                 new ServerFrame().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
