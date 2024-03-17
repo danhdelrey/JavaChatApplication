@@ -39,7 +39,7 @@ public class ServerThread implements Runnable {
     public ServerThread(Socket socketOfServer, int clientNumber) {
         this.socketOfServer = socketOfServer;
         this.clientNumber = clientNumber;
-        System.out.println("Server thread number " + clientNumber + " Started");
+        ServerFrame.logMessage("Server thread number " + clientNumber + " Started");
         isClosed = false;
     }
 
@@ -50,7 +50,7 @@ public class ServerThread implements Runnable {
             is = new BufferedReader(new InputStreamReader(socketOfServer.getInputStream()));
             os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
 
-            System.out.println("Khời động luông mới thành công, ID là: " + clientNumber);
+            ServerFrame.logMessage("Khời động luông mới thành công, ID là: " + clientNumber);
             write("get-id" + "," + this.clientNumber);
 
             ServerFrame.serverThreadBus.sendOnlineList();
@@ -72,7 +72,7 @@ public class ServerThread implements Runnable {
         } catch (IOException e) {
             isClosed = true;
             ServerFrame.serverThreadBus.remove(clientNumber);
-            System.out.println(this.clientNumber + " đã thoát");
+            ServerFrame.logMessage(this.clientNumber + " đã thoát");
             ServerFrame.serverThreadBus.sendOnlineList();
             ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + "---Client " + this.clientNumber + " đã thoát---");
         }

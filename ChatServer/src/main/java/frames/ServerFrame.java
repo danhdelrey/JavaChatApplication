@@ -38,7 +38,7 @@ public class ServerFrame extends javax.swing.JFrame {
         ServerSocket listener = null;
         serverThreadBus = new ServerThreadBus(); //check
 
-        System.out.println("Server is waiting to accept user...");
+        logMessage("Server is waiting to accept user...");
 
         int clientNumber = 0;
 
@@ -65,7 +65,7 @@ public class ServerFrame extends javax.swing.JFrame {
                 socketOfServer = listener.accept();
                 ServerThread serverThread = new ServerThread(socketOfServer, clientNumber++); //check
                 serverThreadBus.add(serverThread); //check
-                System.out.println("Số thread đang chạy là: " + serverThreadBus.getLength()); //check
+                logMessage("Số thread đang chạy là: " + serverThreadBus.getLength()); //check
                 executor.execute(serverThread);
 
             }
@@ -78,6 +78,10 @@ public class ServerFrame extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public static void logMessage(String message) {
+        jTextArea1.setText(jTextArea1.getText() + message + "\n");
     }
 
     /**
@@ -94,6 +98,7 @@ public class ServerFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -123,6 +128,6 @@ public class ServerFrame extends javax.swing.JFrame {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    public static javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
