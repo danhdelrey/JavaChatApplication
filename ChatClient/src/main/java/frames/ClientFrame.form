@@ -30,7 +30,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBox2" min="-2" pref="104" max="-2" attributes="0"/>
+                      <Component id="jComboBox1" min="-2" pref="104" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane3" alignment="1" pref="0" max="32767" attributes="0"/>
@@ -71,7 +71,7 @@
                   </Group>
                   <Component id="jButton2" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jComboBox2" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jComboBox1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
           </Group>
@@ -87,6 +87,9 @@
           <Image iconType="3" name="/send.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
@@ -103,7 +106,7 @@
         <Property name="text" type="java.lang.String" value="G&#x1eed;i &#x111;&#x1ebf;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -115,6 +118,9 @@
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -148,7 +154,6 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="danhdelrey"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder bottom="5" left="7" right="5" top="5"/>
@@ -172,7 +177,6 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="edededededededededededededededededededededededededededededed"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>

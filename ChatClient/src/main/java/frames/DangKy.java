@@ -1,12 +1,6 @@
 package frames;
 
-import classes.DataBase_Connect;
-import java.sql.*;
-
 public class DangKy extends javax.swing.JFrame {
-
-    DataBase_Connect cn = new DataBase_Connect();
-    Connection conn;
 
     public DangKy() {
         initComponents();
@@ -138,17 +132,7 @@ public class DangKy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void xemaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xemaccountActionPerformed
-        try {
-            conn = cn.getJDbConnection();
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from account");
-            while (rs.next()) {
-                System.out.println("Name: " + rs.getString("username") + "\n" + "Pass: " + rs.getString("password"));
-            }
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //xem account
     }//GEN-LAST:event_xemaccountActionPerformed
 
     private void dangky_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dangky_BActionPerformed
@@ -181,22 +165,8 @@ public class DangKy extends javax.swing.JFrame {
             warning_pass.setVisible(true);
             return;
         }
+        //server xử lí
 
-        conn = cn.getJDbConnection();  //Trỏ tới phương thức trong DataBase_Connect
-
-        String sql = "INSERT INTO Account (username, password) VALUES (?, ?)";  //Chèn thông tin vào bảng account
-
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            int rowsAffected = pstmt.executeUpdate();
-
-            pstmt.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }//GEN-LAST:event_dangky_BActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

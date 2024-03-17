@@ -4,17 +4,80 @@
  */
 package frames;
 
+import classes.ServerThread;
+import classes.ServerThreadBus;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 /**
  *
  * @author Danh Del Rey
  */
 public class ServerFrame extends javax.swing.JFrame {
 
+    public static volatile ServerThreadBus serverThreadBus; //check
+    public static Socket socketOfServer;
+
     /**
      * Creates new form ServerFrame
      */
     public ServerFrame() {
         initComponents();
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+
+    public static void main(String args[]) {
+        ServerFrame serverFrame = new ServerFrame();
+
+        ServerSocket listener = null;
+        serverThreadBus = new ServerThreadBus(); //check
+
+        System.out.println("Server is waiting to accept user...");
+
+        int clientNumber = 0;
+
+        // Mở một ServerSocket tại cổng 7777.
+        // Chú ý bạn không thể chọn cổng nhỏ hơn 1023 nếu không là người dùng
+        // đặc quyền (privileged users (root)).
+        try {
+            listener = new ServerSocket(7777);
+        } catch (IOException e) {
+            System.out.println(e);
+            System.exit(1);
+        }
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                10, // corePoolSize
+                100, // maximumPoolSize
+                10, // thread timeout
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(8) // queueCapacity
+        );
+        try {
+            while (true) {
+                // Chấp nhận một yêu cầu kết nối từ phía Client.
+                // Đồng thời nhận được một đối tượng Socket tại server.
+                socketOfServer = listener.accept();
+                ServerThread serverThread = new ServerThread(socketOfServer, clientNumber++); //check
+                serverThreadBus.add(serverThread); //check
+                System.out.println("Số thread đang chạy là: " + serverThreadBus.getLength()); //check
+                executor.execute(serverThread);
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                listener.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -26,18 +89,10 @@ public class ServerFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButton1.setText("Start server");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -48,20 +103,14 @@ public class ServerFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(jButton1)
-                .addContainerGap(228, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -69,48 +118,10 @@ public class ServerFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ServerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ServerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ServerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ServerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ServerFrame().setVisible(true);
-            }
-        });
-
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
