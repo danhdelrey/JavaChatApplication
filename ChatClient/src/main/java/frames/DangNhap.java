@@ -1,5 +1,10 @@
 package frames;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 public class DangNhap extends javax.swing.JFrame {
 
     public DangNhap() {
@@ -128,14 +133,21 @@ public class DangNhap extends javax.swing.JFrame {
         String username = txt_name.getText();
         String password = txt_pass.getText();
 
-        boolean status = false; //Trạng thái đăng nhập
-
+//        boolean status = false; //Trạng thái đăng nhập
         warning.setVisible(false);
 
-        //server
-        if (!status) {
-            warning.setVisible(true);
+        if (username != null && password != null) {
+            try {
+                ClientFrame.write("request_login" + "," + username + "," + password);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            }
         }
+
+//        //server
+//        if (!status) {
+//            warning.setVisible(true);
+//        }
     }//GEN-LAST:event_Login_bActionPerformed
 
 //    public static void main(String args[]) {

@@ -23,11 +23,13 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class ClientFrame extends javax.swing.JFrame {
 
     private Thread thread;
-    private BufferedWriter os;
-    private BufferedReader is;
+    public static BufferedWriter os;
+    public static BufferedReader is;
     private Socket socketOfClient;
     private List<String> onlineList;
     private int id;
+
+    public boolean isLoggedIn = false;
 
     /**
      * Creates new form ClientFrame
@@ -36,66 +38,99 @@ public class ClientFrame extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        this.setVisible(false);
         jTextArea1.setEditable(false);
         jTextArea2.setEditable(false);
         onlineList = new ArrayList<>();
         setUpSocket();
         id = -1;
+
     }
 
-    private void setUpSocket() {
+    public void setUpSocket() {
         try {
+
             thread = new Thread() {
                 @Override
                 public void run() {
-
-                    try {
-                        // Gửi yêu cầu kết nối tới Server đang lắng nghe
-                        // trên máy 'localhost' cổng 7777.
-                        socketOfClient = new Socket("localhost", 7777);
-                        System.out.println("Kết nối thành công!");
-                        // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
-                        os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
-                        // Luồng đầu vào tại Client (Nhận dữ liệu từ server).
-                        is = new BufferedReader(new InputStreamReader(socketOfClient.getInputStream()));
-
-                        String message;
-                        while (true) {
-
-                            message = is.readLine();
-                            if (message == null) {
-                                break;
+                    if (isLoggedIn == false) {
+                        DangNhap dangNhap = new DangNhap();
+                        try {
+                            // Gửi yêu cầu kết nối tới Server đang lắng nghe
+                            // trên máy 'localhost' cổng 7777.
+                            if (socketOfClient == null) {
+                                socketOfClient = new Socket("localhost", 7777);
+                                System.out.println("Kết nối thành công!");
+                                // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
+                                os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
+                                // Luồng đầu vào tại Client (Nhận dữ liệu từ server).
+                                is = new BufferedReader(new InputStreamReader(socketOfClient.getInputStream()));
                             }
-                            String[] messageSplit = message.split(",");
-                            if (messageSplit[0].equals("get-id")) {
-                                setID(Integer.parseInt(messageSplit[1]));
-                                setIDTitle();
-                            }
-                            if (messageSplit[0].equals("update-online-list")) {
-                                onlineList = new ArrayList<>();
-                                String online = "";
-                                String[] onlineSplit = messageSplit[1].split("-");
-                                for (int i = 0; i < onlineSplit.length; i++) {
-                                    onlineList.add(onlineSplit[i]);
-                                    online += "Client " + onlineSplit[i] + " đang online\n";
+
+                            String message;
+                            while (true) {
+
+                                message = is.readLine();
+                                if (message == null) {
+                                    break;
                                 }
-                                jTextArea2.setText(online);
-                                updateCombobox();
+                                String[] messageSplit = message.split(",");
+                                if (messageSplit[0].equals("login_status")) {
+                                    if (messageSplit[1].equals("successful")) {
+                                        dangNhap.setVisible(false);
+                                        successfulLogin();
+                                        setUpSocket();
+                                    }
+                                }
                             }
-                            if (messageSplit[0].equals("global-message")) {
-                                jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n");
-                                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
-                            }
+
+                        } catch (UnknownHostException e) {
+                            return;
+                        } catch (IOException e) {
+                            return;
                         }
+                    } else {
+                        try {
+
+                            String message;
+                            while (true) {
+
+                                message = is.readLine();
+                                if (message == null) {
+                                    break;
+                                }
+                                String[] messageSplit = message.split(",");
+                                if (messageSplit[0].equals("get-id")) {
+                                    setID(Integer.parseInt(messageSplit[1]));
+                                    setIDTitle();
+                                }
+                                if (messageSplit[0].equals("update-online-list")) {
+                                    onlineList = new ArrayList<>();
+                                    String online = "";
+                                    String[] onlineSplit = messageSplit[1].split("-");
+                                    for (int i = 0; i < onlineSplit.length; i++) {
+                                        onlineList.add(onlineSplit[i]);
+                                        online += "Client " + onlineSplit[i] + " đang online\n";
+                                    }
+                                    jTextArea2.setText(online);
+                                    updateCombobox();
+                                }
+                                if (messageSplit[0].equals("global-message")) {
+                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n");
+                                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                                }
+
+                            }
 //                    os.close();
 //                    is.close();
 //                    socketOfClient.close();
-                    } catch (UnknownHostException e) {
-                        return;
-                    } catch (IOException e) {
-                        return;
+                        } catch (UnknownHostException e) {
+                            return;
+                        } catch (IOException e) {
+                            return;
+                        }
                     }
+
                 }
             };
             thread.run();
@@ -123,14 +158,20 @@ public class ClientFrame extends javax.swing.JFrame {
         this.id = id;
     }
 
-    private void write(String message) throws IOException {
+    public static void write(String message) throws IOException {
         os.write(message);
         os.newLine();
         os.flush();
     }
 
+    void successfulLogin() {
+        isLoggedIn = true;
+        this.setVisible(true);
+    }
+
     public static void main(String args[]) {
-        DangNhap dangNhap = new DangNhap();
+        ClientFrame clientFrame = new ClientFrame();
+
     }
 
     /**

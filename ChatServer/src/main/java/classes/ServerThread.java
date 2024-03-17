@@ -51,10 +51,7 @@ public class ServerThread implements Runnable {
             os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
 
             ServerFrame.logMessage("Khời động luông mới thành công, ID là: " + clientNumber);
-            write("get-id" + "," + this.clientNumber);
 
-            ServerFrame.serverThreadBus.sendOnlineList();
-            ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + "---Client " + this.clientNumber + " đã đăng nhập---");
             String message;
             while (!isClosed) {
                 message = is.readLine();
@@ -67,6 +64,17 @@ public class ServerThread implements Runnable {
                 }
                 if (messageSplit[0].equals("send-to-person")) {
                     ServerFrame.serverThreadBus.sendMessageToPersion(Integer.parseInt(messageSplit[3]), "Client " + messageSplit[2] + " (tới bạn): " + messageSplit[1]);
+                }
+                if (messageSplit[0].equals("request_login")) {
+                    boolean loginStatus = DatabaseConnect.verifyLogin(messageSplit[1], messageSplit[2]);
+                    if (loginStatus) {
+                        write("login_status" + "," + "successful");
+                        write("get-id" + "," + this.clientNumber);
+                        ServerFrame.serverThreadBus.sendOnlineList();
+                        ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + "---Client " + this.clientNumber + " đã đăng nhập---");
+                    } else {
+                        write("login_status" + "," + "failed");
+                    }
                 }
             }
         } catch (IOException e) {

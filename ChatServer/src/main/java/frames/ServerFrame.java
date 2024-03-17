@@ -4,6 +4,7 @@
  */
 package frames;
 
+import classes.DatabaseConnect;
 import classes.ServerThread;
 import classes.ServerThreadBus;
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class ServerFrame extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         ServerFrame serverFrame = new ServerFrame();
+        DatabaseConnect.getJDbConnection();
 
         ServerSocket listener = null;
         serverThreadBus = new ServerThreadBus(); //check

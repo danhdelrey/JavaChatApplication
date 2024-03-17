@@ -1,5 +1,6 @@
 package classes;
 
+import frames.ServerFrame;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,7 +10,7 @@ public class DatabaseConnect {
     private static Connection conn;
 
     //Kết nối tới cơ sở dữ liệu
-    public static Connection getJDbConnection() {
+    public static void getJDbConnection() {
 
         String url = "jdbc:mysql://localhost:3306/user";
         String user = "root";
@@ -19,38 +20,13 @@ public class DatabaseConnect {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             conn = DriverManager.getConnection(url, user, password);
-
-            //Kiểm tra CSDL
-            checkAndCreateDatabase();
-
-            return conn;
+            ServerFrame.logMessage("Connect to database successfully!");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DatabaseConnect.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return null;
-    }
-
-    //Kiểm tra xem đã có bảng trong CSDL chưa??
-    public static void checkAndCreateDatabase() {
-        try {
-            DatabaseMetaData dbm = conn.getMetaData(); //Lấy thông tin CSDL đang kết nối
-            ResultSet tables = dbm.getTables(null, null, "Account", null); //Lấy tất cả các bảng trong CSDL đó.
-            if (!tables.next()) {
-                // Table does not exist
-                Statement stmt = conn.createStatement();
-                String sql = "CREATE TABLE Account "
-                        + "ID INT NOT NULL"
-                        + "(username VARCHAR(255), "
-                        + " password VARCHAR(255), "
-                        + " PRIMARY KEY ( ID ))";
-                stmt.executeUpdate(sql);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     //Kiểm tra các thông tin tài khoản người dùng trong Database
