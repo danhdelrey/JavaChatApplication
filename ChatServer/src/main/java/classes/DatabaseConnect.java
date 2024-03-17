@@ -111,7 +111,7 @@ public class DatabaseConnect {
     }
 
     //Xác nhận thông tin đăng nhập
-    public static boolean Verify_danhnhap(String username, String password) {
+    public static boolean verifyLogin(String username, String password) {
         boolean status = false;
 
         String sql = "select * from account where username=? and password=?"; //Lấy thông tin từ bảng account

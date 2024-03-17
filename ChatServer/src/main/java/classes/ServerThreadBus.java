@@ -39,7 +39,7 @@ public class ServerThreadBus {
         }
     }
 
-    public void boardCast(int id, String message) {
+    public void broadCast(int id, String message) {
         for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
             if (serverThread.getClientNumber() == id) {
                 continue;

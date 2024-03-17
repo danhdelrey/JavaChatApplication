@@ -4,6 +4,7 @@ public class DangKy extends javax.swing.JFrame {
 
     public DangKy() {
         initComponents();
+        setLocationRelativeTo(null);
         warning_name.setVisible(false);
         warning_pass.setVisible(false);
     }

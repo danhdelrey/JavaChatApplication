@@ -4,6 +4,8 @@ public class DangNhap extends javax.swing.JFrame {
 
     public DangNhap() {
         initComponents();
+        setLocationRelativeTo(null);
+        this.setVisible(true);
         warning.setVisible(false);
     }
 
@@ -130,21 +132,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         warning.setVisible(false);
 
-//        conn = cn.getJDbConnection();  //Trỏ tới phương thức trong DataBase_Connect
-//
-//        String sql = "select * from account where username=? and password=?"; //Lấy thông tin từ bảng account
-//
-//        try {
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.setString(1, username);
-//            pstmt.setString(2, password);
-//
-//            ResultSet rs = pstmt.executeQuery();
-//            status = rs.next();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        //server
         if (!status) {
             warning.setVisible(true);
         }
