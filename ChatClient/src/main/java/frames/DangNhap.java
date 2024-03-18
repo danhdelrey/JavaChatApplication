@@ -11,7 +11,6 @@ public class DangNhap extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.setVisible(true);
-        warning.setVisible(false);
     }
 
     public String getClientUsername() {
@@ -35,16 +34,15 @@ public class DangNhap extends javax.swing.JFrame {
         Login_b = new javax.swing.JButton();
         Trans_Dangky = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        warning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("ĐĂNG NHẬP");
+        jLabel1.setText("SIGN IN");
 
-        jLabel2.setText("Họ tên");
+        jLabel2.setText("Username");
 
-        jLabel3.setText("Mật khẩu");
+        jLabel3.setText("Password");
 
         Login_b.setText("Đăng nhập");
         Login_b.addActionListener(new java.awt.event.ActionListener() {
@@ -63,9 +61,6 @@ public class DangNhap extends javax.swing.JFrame {
 
         jLabel4.setText("Bạn chưa có tài khoản ?");
 
-        warning.setForeground(new java.awt.Color(255, 51, 51));
-        warning.setText("Sai username hoặc password");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,34 +71,30 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGap(162, 162, 162))
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txt_name)
-                    .addComponent(txt_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)))
+                    .addComponent(txt_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(warning))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Trans_Dangky)))
-                .addGap(139, 139, 139))
+                .addGap(138, 138, 138)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Trans_Dangky)
+                .addGap(127, 127, 127))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(177, 177, 177))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -114,13 +105,11 @@ public class DangNhap extends javax.swing.JFrame {
                     .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(Login_b, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(warning)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Trans_Dangky)
-                    .addComponent(jLabel4))
-                .addGap(14, 14, 14))
+                    .addComponent(jLabel4)
+                    .addComponent(Trans_Dangky))
+                .addContainerGap())
         );
 
         pack();
@@ -137,14 +126,16 @@ public class DangNhap extends javax.swing.JFrame {
         String password = txt_pass.getText();
 
 //        boolean status = false; //Trạng thái đăng nhập
-        warning.setVisible(false);
+        if (username.length() == 0 || password.length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Không bỏ trống ô điền");
+            return;
+        }
 
-        if (username != null && password != null) {
-            try {
-                ClientFrame.write("request_login" + "," + username + "," + password);
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
-            }
+        try {
+            ClientFrame.write("request_login" + "," + username + "," + password);
+            System.out.println("da gui yeu cau dang nhap");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
 
 //        //server
@@ -193,6 +184,5 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_pass;
-    private javax.swing.JLabel warning;
     // End of variables declaration//GEN-END:variables
 }

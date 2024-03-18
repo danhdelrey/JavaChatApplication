@@ -9,8 +9,6 @@ public class DangKy extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
-        warning_name.setVisible(false);
-        warning_pass.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -24,8 +22,6 @@ public class DangKy extends javax.swing.JFrame {
         passL = new javax.swing.JLabel();
         nameL = new javax.swing.JLabel();
         dangky_B = new javax.swing.JButton();
-        warning_name = new javax.swing.JLabel();
-        warning_pass = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,10 +43,6 @@ public class DangKy extends javax.swing.JFrame {
                 dangky_BActionPerformed(evt);
             }
         });
-
-        warning_name.setText("Username chỉ tối đa 8 kí tự");
-
-        warning_pass.setText("Mật khẩu phải có ít nhất 6 kí tự");
 
         jButton1.setText("Already have an account?");
         jButton1.setBorder(null);
@@ -76,14 +68,12 @@ public class DangKy extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                                 .addComponent(txtpass))
-                            .addComponent(warning_name)
-                            .addComponent(warning_pass)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jButton1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(Dangky_label))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(dangky_B)))
@@ -98,19 +88,15 @@ public class DangKy extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(warning_name)
-                .addGap(2, 2, 2)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(warning_pass)
-                .addGap(15, 15, 15)
+                .addGap(37, 37, 37)
                 .addComponent(dangky_B)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,30 +117,23 @@ public class DangKy extends javax.swing.JFrame {
         String username = txtname.getText();
         String password = txtpass.getText();
 
-        warning_name.setVisible(false);
-        warning_pass.setVisible(false);
-
         if (username.length() == 0) {
-            warning_name.setText("Không được để trống username!!!");
-            warning_name.setVisible(true);
+            JOptionPane.showMessageDialog(rootPane, "Không được để trống username!!!");
             return;
         }
 
         if (username.length() > 8) {
-            warning_name.setText("Username chỉ tối đa 8 kí tự");
-            warning_name.setVisible(true);
+            JOptionPane.showMessageDialog(rootPane, "Username chỉ tối đa 8 kí tự");
             return;
         }
 
         if (password.length() == 0) {
-            warning_pass.setText("Không được để trống password!!!");
-            warning_pass.setVisible(true);
+            JOptionPane.showMessageDialog(rootPane, "Không được để trống password!!!");
             return;
         }
 
         if (password.length() < 6) {
-            warning_pass.setText("Mật khẩu phải có ít nhất 6 kí tự");
-            warning_pass.setVisible(true);
+            JOptionPane.showMessageDialog(rootPane, "Mật khẩu phải có ít nhất 6 kí tự");
             return;
         }
 
@@ -168,7 +147,6 @@ public class DangKy extends javax.swing.JFrame {
     }//GEN-LAST:event_dangky_BActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         // Hiển thị giao diện đăng nhập
         ClientFrame.dangNhap.setVisible(true);
         this.setVisible(false);
@@ -186,7 +164,5 @@ public class DangKy extends javax.swing.JFrame {
     private javax.swing.JLabel passL;
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtpass;
-    private javax.swing.JLabel warning_name;
-    private javax.swing.JLabel warning_pass;
     // End of variables declaration//GEN-END:variables
 }

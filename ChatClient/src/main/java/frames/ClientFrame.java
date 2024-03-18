@@ -83,12 +83,18 @@ public class ClientFrame extends javax.swing.JFrame {
                                         successfulLogin();
                                         setUpSocket();
                                         System.out.println("dang nhap thanh cong");
+                                    }else if(messageSplit[1].equals("failed")){
+                                        JOptionPane.showMessageDialog(rootPane, "Sai tên đăng nhập hoặc mật khẩu!!!");
+                                        System.out.println("dang nhap that bai");
                                     }
                                 }
                                 if (messageSplit[0].equals("signup_status")) {
                                     if (messageSplit[1].equals("successful")) {
                                         JOptionPane.showMessageDialog(rootPane, "Successfully!");
                                         System.out.println("dang ky thanh cong");
+                                    }else if(messageSplit[1].equals("failed")){
+                                        JOptionPane.showMessageDialog(rootPane, "Tên tài khoản đã có người sử dụng!");
+                                        System.out.println("dang ky that bai");
                                     }
                                 }
                             }
