@@ -122,8 +122,8 @@ public class DangKy extends javax.swing.JFrame {
             return;
         }
 
-        if (username.length() > 8) {
-            JOptionPane.showMessageDialog(rootPane, "Username chỉ tối đa 8 kí tự");
+        if (username.length() > 15) {
+            JOptionPane.showMessageDialog(rootPane, "Username chỉ tối đa 15 kí tự");
             return;
         }
 

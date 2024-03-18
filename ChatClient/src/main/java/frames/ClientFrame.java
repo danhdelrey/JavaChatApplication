@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -137,7 +139,11 @@ public class ClientFrame extends javax.swing.JFrame {
                                     updateCombobox(onlineList);
                                 }
                                 if (messageSplit[0].equals("global-message")) {
-                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n\n");
+                                    LocalDateTime date = LocalDateTime.now();
+                                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                                    String formattedDate = date.format(myFormatObj);
+
+                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n" + formattedDate + "\n\n");
                                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
                                 }
 
@@ -243,20 +249,25 @@ public class ClientFrame extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Danh sách online");
 
-        jScrollPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane3.setBorder(null);
 
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
-        jTextArea2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 7, 5, 5));
+        jTextArea2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jTextArea2.setFocusable(false);
         jScrollPane3.setViewportView(jTextArea2);
 
+        jScrollPane2.setBorder(null);
+
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 5));
         jTextArea1.setFocusable(false);
         jScrollPane2.setViewportView(jTextArea1);
 
@@ -311,6 +322,11 @@ public class ClientFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String messageContent = jTextField1.getText();
+
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = date.format(myFormatObj);
+
         if (messageContent.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tin nhắn");
             return;
@@ -318,7 +334,7 @@ public class ClientFrame extends javax.swing.JFrame {
         if (jComboBox1.getSelectedIndex() == 0) {
             try {
                 write("send-to-global" + "," + messageContent + "," + this.clientUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n\n");
+                jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
@@ -327,7 +343,7 @@ public class ClientFrame extends javax.swing.JFrame {
             try {
                 String selectedUsername = (String) jComboBox1.getSelectedItem();
                 write("send-to-person" + "," + messageContent + "," + selectedUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n\n");
+                jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + formattedDate + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
             } catch (IOException ex) {
