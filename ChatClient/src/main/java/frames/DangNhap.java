@@ -123,10 +123,9 @@ public class DangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Trans_DangkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Trans_DangkyActionPerformed
-        this.setVisible(false);
 
-        // Hiển thị giao diện đăng nhập
-        new DangKy().setVisible(true);
+        DangKy dangKy = new DangKy();
+        this.setVisible(false);
     }//GEN-LAST:event_Trans_DangkyActionPerformed
 
     private void Login_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_bActionPerformed

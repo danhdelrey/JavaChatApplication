@@ -1,9 +1,13 @@
 package frames;
 
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 public class DangKy extends javax.swing.JFrame {
 
     public DangKy() {
         initComponents();
+        this.setVisible(true);
         setLocationRelativeTo(null);
         warning_name.setVisible(false);
         warning_pass.setVisible(false);
@@ -19,7 +23,6 @@ public class DangKy extends javax.swing.JFrame {
         txtpass = new javax.swing.JTextField();
         passL = new javax.swing.JLabel();
         nameL = new javax.swing.JLabel();
-        xemaccount = new javax.swing.JButton();
         dangky_B = new javax.swing.JButton();
         warning_name = new javax.swing.JLabel();
         warning_pass = new javax.swing.JLabel();
@@ -29,19 +32,14 @@ public class DangKy extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(247, 247, 247));
 
-        Dangky_label.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Dangky_label.setText("ĐĂNG KÝ");
+        Dangky_label.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Dangky_label.setText("SIGN UP");
 
-        passL.setText("Mật khẩu");
+        passL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        passL.setText("Password:");
 
-        nameL.setText("Họ tên");
-
-        xemaccount.setText("Xem thông tin");
-        xemaccount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xemaccountActionPerformed(evt);
-            }
-        });
+        nameL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        nameL.setText("Username:");
 
         dangky_B.setText("Đăng ký");
         dangky_B.addActionListener(new java.awt.event.ActionListener() {
@@ -54,7 +52,7 @@ public class DangKy extends javax.swing.JFrame {
 
         warning_pass.setText("Mật khẩu phải có ít nhất 6 kí tự");
 
-        jButton1.setText("Tôi đã có tài khoản");
+        jButton1.setText("Already have an account?");
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,9 +67,6 @@ public class DangKy extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(Dangky_label))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(passL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -79,18 +74,20 @@ public class DangKy extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(dangky_B)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                                    .addComponent(xemaccount))
-                                .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                                .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                                 .addComponent(txtpass))
                             .addComponent(warning_name)
                             .addComponent(warning_pass)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jButton1)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                        .addGap(149, 149, 149)
+                        .addComponent(Dangky_label))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(dangky_B)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,11 +106,9 @@ public class DangKy extends javax.swing.JFrame {
                     .addComponent(passL))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(warning_pass)
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(xemaccount)
-                    .addComponent(dangky_B))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
+                .addComponent(dangky_B)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -131,10 +126,6 @@ public class DangKy extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void xemaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xemaccountActionPerformed
-        //xem account
-    }//GEN-LAST:event_xemaccountActionPerformed
 
     private void dangky_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dangky_BActionPerformed
         String username = txtname.getText();
@@ -166,15 +157,21 @@ public class DangKy extends javax.swing.JFrame {
             warning_pass.setVisible(true);
             return;
         }
-        //server xử lí
+
+        try {
+            ClientFrame.write("request_signup" + "," + username + "," + password);
+            System.out.println("da gui yeu cau dang ky");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+        }
 
     }//GEN-LAST:event_dangky_BActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
 
         // Hiển thị giao diện đăng nhập
-        new DangNhap().setVisible(true);
+        DangNhap dangNhap = new DangNhap();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -191,6 +188,5 @@ public class DangKy extends javax.swing.JFrame {
     private javax.swing.JTextField txtpass;
     private javax.swing.JLabel warning_name;
     private javax.swing.JLabel warning_pass;
-    private javax.swing.JButton xemaccount;
     // End of variables declaration//GEN-END:variables
 }

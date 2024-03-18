@@ -46,10 +46,6 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
-                          <Component id="Dangky_label" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="passL" max="32767" attributes="0"/>
@@ -58,12 +54,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="dangky_B" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="30" max="32767" attributes="0"/>
-                                      <Component id="xemaccount" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="txtname" alignment="0" pref="208" max="32767" attributes="0"/>
+                                  <Component id="txtname" alignment="0" pref="209" max="32767" attributes="0"/>
                                   <Component id="txtpass" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Component id="warning_name" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -71,11 +62,19 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="Dangky_label" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                          <Component id="dangky_B" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                  <EmptySpace pref="87" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -98,12 +97,9 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="warning_pass" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="xemaccount" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="dangky_B" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="dangky_B" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -114,9 +110,9 @@
         <Component class="javax.swing.JLabel" name="Dangky_label">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="24" style="0"/>
+              <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x102;NG K&#xdd;"/>
+            <Property name="text" type="java.lang.String" value="SIGN UP"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtname">
@@ -125,21 +121,19 @@
         </Component>
         <Component class="javax.swing.JLabel" name="passL">
           <Properties>
-            <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Password:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="nameL">
           <Properties>
-            <Property name="text" type="java.lang.String" value="H&#x1ecd; t&#xea;n"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Username:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="xemaccount">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Xem th&#xf4;ng tin"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xemaccountActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="dangky_B">
           <Properties>
@@ -161,7 +155,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xf4;i &#x111;&#xe3; c&#xf3; t&#xe0;i kho&#x1ea3;n"/>
+            <Property name="text" type="java.lang.String" value="Already have an account?"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

@@ -80,6 +80,13 @@ public class ClientFrame extends javax.swing.JFrame {
                                         dangNhap.setVisible(false);
                                         successfulLogin();
                                         setUpSocket();
+                                        System.out.println("dang nhap thanh cong");
+                                    }
+                                }
+                                if (messageSplit[0].equals("signup_status")) {
+                                    if (messageSplit[1].equals("successful")) {
+                                        JOptionPane.showMessageDialog(rootPane, "Successfully!");
+                                        System.out.println("dang ky thanh cong");
                                     }
                                 }
                             }

@@ -60,7 +60,7 @@ public class DatabaseConnect {
     }
 
     //Xác nhận thông tin đăng ký
-    public static boolean Verify_dangky(String username, String password) {
+    public static boolean verifySignup(String username, String password) {
 
         boolean status = false;
 
@@ -68,9 +68,10 @@ public class DatabaseConnect {
             return status;
         }
 
-        String sql = "INSERT INTO Account (username, password) VALUES (?, ?)";  //Chèn thông tin vào bảng account
+        String sql = "INSERT INTO Account (username, password) VALUES (?,?)";  //Chèn thông tin vào bảng account
 
         try {
+
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
             pstmt.setString(2, password);

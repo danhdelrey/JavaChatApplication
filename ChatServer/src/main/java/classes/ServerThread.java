@@ -76,6 +76,16 @@ public class ServerThread implements Runnable {
                         write("login_status" + "," + "failed");
                     }
                 }
+                if (messageSplit[0].equals("request_signup")) {
+                    boolean signupStatus = DatabaseConnect.verifySignup(messageSplit[1], messageSplit[2]);
+                    if (signupStatus) {
+                        write("signup_status" + "," + "successful");
+                        System.out.println("dang ky thanh cong");
+                    } else {
+                        write("signup_status" + "," + "failed");
+                        System.out.println("dang ky that bai");
+                    }
+                }
             }
         } catch (IOException e) {
             isClosed = true;
