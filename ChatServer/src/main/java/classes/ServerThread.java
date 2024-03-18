@@ -36,10 +36,8 @@ public class ServerThread implements Runnable {
         return clientUsername;
     }
 
-    public ServerThread(Socket socketOfServer, String clientUsername) {
+    public ServerThread(Socket socketOfServer) {
         this.socketOfServer = socketOfServer;
-        this.clientUsername = clientUsername;
-        ServerFrame.logMessage("Server thread of " + clientUsername + " Started");
         isClosed = false;
     }
 
@@ -49,8 +47,6 @@ public class ServerThread implements Runnable {
             // Mở luồng vào ra trên Socket tại Server.
             is = new BufferedReader(new InputStreamReader(socketOfServer.getInputStream()));
             os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
-
-            ServerFrame.logMessage("Khời động luông mới thành công, username là: " + clientUsername);
 
             String message;
             while (!isClosed) {
@@ -63,7 +59,7 @@ public class ServerThread implements Runnable {
                     ServerFrame.serverThreadBus.broadCast(this.getClientUsername(), "global-message" + "," + this.getClientUsername() + ": " + messageSplit[1]);
                 }
                 if (messageSplit[0].equals("send-to-person")) {
-                    ServerFrame.serverThreadBus.sendMessageToPerson(messageSplit[2], this.getClientUsername() + " (tới bạn): " + messageSplit[1]);
+                    ServerFrame.serverThreadBus.sendMessageToPerson(messageSplit[2], this.getClientUsername() + " (to you): " + messageSplit[1]);
                 }
                 if (messageSplit[0].equals("request_login")) {
                     boolean loginStatus = DatabaseConnect.verifyLogin(messageSplit[1], messageSplit[2]);
@@ -72,7 +68,7 @@ public class ServerThread implements Runnable {
                         write("get-clientUsername" + "," + messageSplit[1]);
                         this.clientUsername = messageSplit[1];
                         ServerFrame.serverThreadBus.sendOnlineList();
-                        ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " đã đăng nhập.");
+                        ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " has entered the chat.");
                     } else {
                         write("login_status" + "," + "failed");
                     }
@@ -91,9 +87,9 @@ public class ServerThread implements Runnable {
         } catch (IOException e) {
             isClosed = true;
             ServerFrame.serverThreadBus.remove(clientUsername);
-            ServerFrame.logMessage(this.getClientUsername() + " đã thoát");
+            ServerFrame.logMessage(this.getClientUsername() + " has left the chat.");
             ServerFrame.serverThreadBus.sendOnlineList();
-            ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " đã thoát.");
+            ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " has left the chat.");
         }
     }
 

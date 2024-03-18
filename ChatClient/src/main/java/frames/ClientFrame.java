@@ -83,7 +83,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                         successfulLogin();
                                         setUpSocket();
                                         System.out.println("dang nhap thanh cong");
-                                    }else if(messageSplit[1].equals("failed")){
+                                    } else if (messageSplit[1].equals("failed")) {
                                         JOptionPane.showMessageDialog(rootPane, "Sai tên đăng nhập hoặc mật khẩu!!!");
                                         System.out.println("dang nhap that bai");
                                     }
@@ -92,7 +92,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                     if (messageSplit[1].equals("successful")) {
                                         JOptionPane.showMessageDialog(rootPane, "Successfully!");
                                         System.out.println("dang ky thanh cong");
-                                    }else if(messageSplit[1].equals("failed")){
+                                    } else if (messageSplit[1].equals("failed")) {
                                         JOptionPane.showMessageDialog(rootPane, "Tên tài khoản đã có người sử dụng!");
                                         System.out.println("dang ky that bai");
                                     }
@@ -126,7 +126,9 @@ public class ClientFrame extends javax.swing.JFrame {
                                     for (int i = 0; i < onlineSplit.length; i++) {
                                         onlineList.add(onlineSplit[i]);
 
-                                        if (!onlineSplit[i].equals(clientUsername)) {
+                                        if (onlineSplit[i].equals(clientUsername)) {
+                                            online += onlineSplit[i] + " (you)" + "\n";
+                                        } else {
                                             online += onlineSplit[i] + "\n";
                                         }
 
@@ -159,7 +161,7 @@ public class ClientFrame extends javax.swing.JFrame {
 
     private void updateCombobox(List<String> onlineList) {
         jComboBox1.removeAllItems();
-        jComboBox1.addItem("Gửi tất cả");
+        jComboBox1.addItem("All");
         String clientUsername = this.clientUsername;
         for (String e : onlineList) {
             if (!e.equals(clientUsername)) {
@@ -230,6 +232,7 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setFocusable(false);
+        jComboBox1.setRequestFocusEnabled(false);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -315,7 +318,7 @@ public class ClientFrame extends javax.swing.JFrame {
         if (jComboBox1.getSelectedIndex() == 0) {
             try {
                 write("send-to-global" + "," + messageContent + "," + this.clientUsername);
-                jTextArea1.setText(jTextArea1.getText() + "Bạn: " + messageContent + "\n\n");
+                jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
@@ -324,7 +327,7 @@ public class ClientFrame extends javax.swing.JFrame {
             try {
                 String selectedUsername = (String) jComboBox1.getSelectedItem();
                 write("send-to-person" + "," + messageContent + "," + selectedUsername);
-                jTextArea1.setText(jTextArea1.getText() + "Bạn (tới " + selectedUsername + "): " + messageContent + "\n\n");
+                jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
             } catch (IOException ex) {

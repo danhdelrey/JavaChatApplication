@@ -63,7 +63,7 @@ public class ServerFrame extends javax.swing.JFrame {
                 // Chấp nhận một yêu cầu kết nối từ phía Client.
                 // Đồng thời nhận được một đối tượng Socket tại server.
                 socketOfServer = listener.accept();
-                ServerThread serverThread = new ServerThread(socketOfServer, "user"); //check
+                ServerThread serverThread = new ServerThread(socketOfServer); //check
                 serverThreadBus.add(serverThread); //check
                 logMessage("Số thread đang chạy là: " + serverThreadBus.getLength()); //check
                 executor.execute(serverThread);
