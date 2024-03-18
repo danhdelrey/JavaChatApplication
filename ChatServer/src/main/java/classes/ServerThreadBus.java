@@ -39,9 +39,9 @@ public class ServerThreadBus {
         }
     }
 
-    public void broadCast(int id, String message) {
+    public void broadCast(String clientUsername, String message) {
         for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
-            if (serverThread.getClientNumber() == id) {
+            if (serverThread.getClientUsername() == clientUsername) {
                 continue;
             } else {
                 try {
@@ -61,14 +61,14 @@ public class ServerThreadBus {
         String res = "";
         List<ServerThread> threadbus = ServerFrame.serverThreadBus.getListServerThreads();
         for (ServerThread serverThread : threadbus) {
-            res += serverThread.getClientNumber() + "-";
+            res += serverThread.getClientUsername() + "-";
         }
         ServerFrame.serverThreadBus.mutilCastSend("update-online-list" + "," + res);
     }
 
-    public void sendMessageToPersion(int id, String message) {
+    public void sendMessageToPerson(String clientUsername, String message) {
         for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
-            if (serverThread.getClientNumber() == id) {
+            if (serverThread.getClientUsername().equals(clientUsername)) {
                 try {
                     serverThread.write("global-message" + "," + message);
                     break;
@@ -79,9 +79,9 @@ public class ServerThreadBus {
         }
     }
 
-    public void remove(int id) {
+    public void remove(String clientUsername) {
         for (int i = 0; i < ServerFrame.serverThreadBus.getLength(); i++) {
-            if (ServerFrame.serverThreadBus.getListServerThreads().get(i).getClientNumber() == id) {
+            if (ServerFrame.serverThreadBus.getListServerThreads().get(i).getClientUsername() == clientUsername) {
                 ServerFrame.serverThreadBus.listServerThreads.remove(i);
             }
         }

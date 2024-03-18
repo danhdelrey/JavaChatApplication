@@ -27,7 +27,7 @@ public class ClientFrame extends javax.swing.JFrame {
     public static BufferedReader is;
     private Socket socketOfClient;
     private List<String> onlineList;
-    private int id;
+    private String clientUsername;
 
     public boolean isLoggedIn = false;
 
@@ -45,7 +45,6 @@ public class ClientFrame extends javax.swing.JFrame {
         jTextArea2.setEditable(false);
         onlineList = new ArrayList<>();
         setUpSocket();
-        id = -1;
 
     }
 
@@ -80,6 +79,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                 if (messageSplit[0].equals("login_status")) {
                                     if (messageSplit[1].equals("successful")) {
                                         dangNhap.setVisible(false);
+                                        setClientUsername(dangNhap.getClientUsername());
                                         successfulLogin();
                                         setUpSocket();
                                         System.out.println("dang nhap thanh cong");
@@ -109,9 +109,9 @@ public class ClientFrame extends javax.swing.JFrame {
                                     break;
                                 }
                                 String[] messageSplit = message.split(",");
-                                if (messageSplit[0].equals("get-id")) {
-                                    setID(Integer.parseInt(messageSplit[1]));
-                                    setIDTitle();
+                                if (messageSplit[0].equals("get-clientUsername")) {
+                                    setClientUsername(messageSplit[1]);
+                                    setClientUsernameTitle();
                                 }
                                 if (messageSplit[0].equals("update-online-list")) {
                                     onlineList = new ArrayList<>();
@@ -119,13 +119,17 @@ public class ClientFrame extends javax.swing.JFrame {
                                     String[] onlineSplit = messageSplit[1].split("-");
                                     for (int i = 0; i < onlineSplit.length; i++) {
                                         onlineList.add(onlineSplit[i]);
-                                        online += "Client " + onlineSplit[i] + " đang online\n";
+
+                                        if (!onlineSplit[i].equals(clientUsername)) {
+                                            online += onlineSplit[i] + "\n";
+                                        }
+
                                     }
                                     jTextArea2.setText(online);
-                                    updateCombobox();
+                                    updateCombobox(onlineList);
                                 }
                                 if (messageSplit[0].equals("global-message")) {
-                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n");
+                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n\n");
                                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
                                 }
 
@@ -147,24 +151,24 @@ public class ClientFrame extends javax.swing.JFrame {
         }
     }
 
-    private void updateCombobox() {
+    private void updateCombobox(List<String> onlineList) {
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Gửi tất cả");
-        String idString = "" + this.id;
+        String clientUsername = this.clientUsername;
         for (String e : onlineList) {
-            if (!e.equals(idString)) {
-                jComboBox1.addItem("Client " + e);
+            if (!e.equals(clientUsername)) {
+                jComboBox1.addItem(e);
             }
         }
 
     }
 
-    private void setIDTitle() {
-        this.setTitle("Client " + this.id);
+    private void setClientUsernameTitle() {
+        this.setTitle(this.clientUsername);
     }
 
-    private void setID(int id) {
-        this.id = id;
+    private void setClientUsername(String clientUsername) {
+        this.clientUsername = clientUsername;
     }
 
     public static void write(String message) throws IOException {
@@ -304,18 +308,19 @@ public class ClientFrame extends javax.swing.JFrame {
         }
         if (jComboBox1.getSelectedIndex() == 0) {
             try {
-                write("send-to-global" + "," + messageContent + "," + this.id);
-                jTextArea1.setText(jTextArea1.getText() + "Bạn: " + messageContent + "\n");
+                write("send-to-global" + "," + messageContent + "," + this.clientUsername);
+                jTextArea1.setText(jTextArea1.getText() + "Bạn: " + messageContent + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
         } else {
             try {
-                String[] parner = ((String) jComboBox1.getSelectedItem()).split(" ");
-                write("send-to-person" + "," + messageContent + "," + this.id + "," + parner[1]);
-                jTextArea1.setText(jTextArea1.getText() + "Bạn (tới Client " + parner[1] + "): " + messageContent + "\n");
+                String selectedUsername = (String) jComboBox1.getSelectedItem();
+                write("send-to-person" + "," + messageContent + "," + selectedUsername);
+                jTextArea1.setText(jTextArea1.getText() + "Bạn (tới " + selectedUsername + "): " + messageContent + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }

@@ -19,7 +19,7 @@ import java.net.Socket;
 public class ServerThread implements Runnable {
 
     private Socket socketOfServer;
-    private int clientNumber;
+    private String clientUsername;
     private BufferedReader is;
     private BufferedWriter os;
     private boolean isClosed;
@@ -32,14 +32,14 @@ public class ServerThread implements Runnable {
         return os;
     }
 
-    public int getClientNumber() {
-        return clientNumber;
+    public String getClientUsername() {
+        return clientUsername;
     }
 
-    public ServerThread(Socket socketOfServer, int clientNumber) {
+    public ServerThread(Socket socketOfServer, String clientUsername) {
         this.socketOfServer = socketOfServer;
-        this.clientNumber = clientNumber;
-        ServerFrame.logMessage("Server thread number " + clientNumber + " Started");
+        this.clientUsername = clientUsername;
+        ServerFrame.logMessage("Server thread of " + clientUsername + " Started");
         isClosed = false;
     }
 
@@ -50,7 +50,7 @@ public class ServerThread implements Runnable {
             is = new BufferedReader(new InputStreamReader(socketOfServer.getInputStream()));
             os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
 
-            ServerFrame.logMessage("Khời động luông mới thành công, ID là: " + clientNumber);
+            ServerFrame.logMessage("Khời động luông mới thành công, username là: " + clientUsername);
 
             String message;
             while (!isClosed) {
@@ -60,18 +60,19 @@ public class ServerThread implements Runnable {
                 }
                 String[] messageSplit = message.split(",");
                 if (messageSplit[0].equals("send-to-global")) {
-                    ServerFrame.serverThreadBus.broadCast(this.getClientNumber(), "global-message" + "," + "Client " + messageSplit[2] + ": " + messageSplit[1]);
+                    ServerFrame.serverThreadBus.broadCast(this.getClientUsername(), "global-message" + "," + this.getClientUsername() + ": " + messageSplit[1]);
                 }
                 if (messageSplit[0].equals("send-to-person")) {
-                    ServerFrame.serverThreadBus.sendMessageToPersion(Integer.parseInt(messageSplit[3]), "Client " + messageSplit[2] + " (tới bạn): " + messageSplit[1]);
+                    ServerFrame.serverThreadBus.sendMessageToPerson(messageSplit[2], this.getClientUsername() + " (tới bạn): " + messageSplit[1]);
                 }
                 if (messageSplit[0].equals("request_login")) {
                     boolean loginStatus = DatabaseConnect.verifyLogin(messageSplit[1], messageSplit[2]);
                     if (loginStatus) {
                         write("login_status" + "," + "successful");
-                        write("get-id" + "," + this.clientNumber);
+                        write("get-clientUsername" + "," + messageSplit[1]);
+                        this.clientUsername = messageSplit[1];
                         ServerFrame.serverThreadBus.sendOnlineList();
-                        ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + "---Client " + this.clientNumber + " đã đăng nhập---");
+                        ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " đã đăng nhập.");
                     } else {
                         write("login_status" + "," + "failed");
                     }
@@ -89,10 +90,10 @@ public class ServerThread implements Runnable {
             }
         } catch (IOException e) {
             isClosed = true;
-            ServerFrame.serverThreadBus.remove(clientNumber);
-            ServerFrame.logMessage(this.clientNumber + " đã thoát");
+            ServerFrame.serverThreadBus.remove(clientUsername);
+            ServerFrame.logMessage(this.getClientUsername() + " đã thoát");
             ServerFrame.serverThreadBus.sendOnlineList();
-            ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + "---Client " + this.clientNumber + " đã thoát---");
+            ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " đã thoát.");
         }
     }
 

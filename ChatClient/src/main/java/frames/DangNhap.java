@@ -14,6 +14,10 @@ public class DangNhap extends javax.swing.JFrame {
         warning.setVisible(false);
     }
 
+    public String getClientUsername() {
+        return txt_name.getText();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
