@@ -31,6 +31,8 @@ public class ClientFrame extends javax.swing.JFrame {
 
     public boolean isLoggedIn = false;
 
+    public static DangNhap dangNhap;
+
     /**
      * Creates new form ClientFrame
      */
@@ -54,7 +56,7 @@ public class ClientFrame extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     if (isLoggedIn == false) {
-                        DangNhap dangNhap = new DangNhap();
+                        dangNhap = new DangNhap();
                         try {
                             // Gửi yêu cầu kết nối tới Server đang lắng nghe
                             // trên máy 'localhost' cổng 7777.
