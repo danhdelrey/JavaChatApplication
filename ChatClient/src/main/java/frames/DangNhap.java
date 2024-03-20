@@ -1,5 +1,6 @@
 package frames;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +49,11 @@ public class DangNhap extends javax.swing.JFrame {
         Login_b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Login_bActionPerformed(evt);
+            }
+        });
+        Login_b.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Login_bKeyPressed(evt);
             }
         });
 
@@ -125,7 +131,6 @@ public class DangNhap extends javax.swing.JFrame {
         String username = txt_name.getText();
         String password = txt_pass.getText();
 
-//        boolean status = false; //Trạng thái đăng nhập
         if (username.length() == 0 || password.length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Không bỏ trống ô điền");
             return;
@@ -137,12 +142,26 @@ public class DangNhap extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
-
-//        //server
-//        if (!status) {
-//            warning.setVisible(true);
-//        }
     }//GEN-LAST:event_Login_bActionPerformed
+
+    private void Login_bKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Login_bKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String username = txt_name.getText();
+            String password = txt_pass.getText();
+
+            if (username.length() == 0 || password.length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Không bỏ trống ô điền");
+                return;
+            }
+
+            try {
+                ClientFrame.write("request_login" + "," + username + "," + password);
+                System.out.println("da gui yeu cau dang nhap");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            }
+        }
+    }//GEN-LAST:event_Login_bKeyPressed
 
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */

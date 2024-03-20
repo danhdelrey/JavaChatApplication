@@ -1,5 +1,6 @@
 package frames;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
@@ -41,6 +42,11 @@ public class DangKy extends javax.swing.JFrame {
         dangky_B.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dangky_BActionPerformed(evt);
+            }
+        });
+        dangky_B.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dangky_BKeyPressed(evt);
             }
         });
 
@@ -143,7 +149,6 @@ public class DangKy extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
-
     }//GEN-LAST:event_dangky_BActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -151,6 +156,40 @@ public class DangKy extends javax.swing.JFrame {
         ClientFrame.dangNhap.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void dangky_BKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dangky_BKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String username = txtname.getText();
+            String password = txtpass.getText();
+
+            if (username.length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Không được để trống username!!!");
+                return;
+            }
+
+            if (username.length() > 15) {
+                JOptionPane.showMessageDialog(rootPane, "Username chỉ tối đa 15 kí tự");
+                return;
+            }
+
+            if (password.length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Không được để trống password!!!");
+                return;
+            }
+
+            if (password.length() < 6) {
+                JOptionPane.showMessageDialog(rootPane, "Mật khẩu phải có ít nhất 6 kí tự");
+                return;
+            }
+
+            try {
+                ClientFrame.write("request_signup" + "," + username + "," + password);
+                System.out.println("da gui yeu cau dang ky");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            }
+        }
+    }//GEN-LAST:event_dangky_BKeyPressed
 
     /**
      * @param args the command line arguments

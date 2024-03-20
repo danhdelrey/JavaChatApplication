@@ -4,6 +4,7 @@
  */
 package frames;
 
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -236,6 +237,11 @@ public class ClientFrame extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton2KeyPressed(evt);
+            }
+        });
 
         Send_file_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/attach-file.png"))); // NOI18N
         Send_file_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -419,6 +425,41 @@ public class ClientFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_Send_file_ButtonActionPerformed
+
+    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String messageContent = jTextField1.getText();
+
+            LocalDateTime date = LocalDateTime.now();
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            String formattedDate = date.format(myFormatObj);
+
+            if (messageContent.isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tin nhắn");
+                return;
+            }
+            if (jComboBox1.getSelectedIndex() == 0) {
+                try {
+                    write("send-to-global" + "," + messageContent + "," + this.clientUsername);
+                    jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
+                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                }
+            } else {
+                try {
+                    String selectedUsername = (String) jComboBox1.getSelectedItem();
+                    write("send-to-person" + "," + messageContent + "," + selectedUsername);
+                    jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + formattedDate + "\n\n");
+                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                }
+            }
+            jTextField1.setText("");
+        }
+    }//GEN-LAST:event_jButton2KeyPressed
 
     /**
      * @param args the command line arguments
