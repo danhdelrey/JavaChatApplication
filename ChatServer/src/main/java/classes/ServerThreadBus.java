@@ -81,9 +81,19 @@ public class ServerThreadBus {
 
     public void remove(String clientUsername) {
         for (int i = 0; i < ServerFrame.serverThreadBus.getLength(); i++) {
-            if (ServerFrame.serverThreadBus.getListServerThreads().get(i).getClientUsername() == clientUsername) {
+            if (ServerFrame.serverThreadBus.getListServerThreads().get(i).getClientUsername().equals(clientUsername)) {
                 ServerFrame.serverThreadBus.listServerThreads.remove(i);
             }
         }
+    }
+
+    public boolean isOnline(String clientUsername) {
+        for (int i = 0; i < ServerFrame.serverThreadBus.getLength(); i++) {
+            String onlineClientUsername = ServerFrame.serverThreadBus.getListServerThreads().get(i).getClientUsername();
+            if (onlineClientUsername != null && onlineClientUsername.equals(clientUsername)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

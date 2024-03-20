@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,11 +65,15 @@ public class ServerThread implements Runnable {
                 if (messageSplit[0].equals("request_login")) {
                     boolean loginStatus = DatabaseConnect.verifyLogin(messageSplit[1], messageSplit[2]);
                     if (loginStatus) {
-                        write("login_status" + "," + "successful");
-                        write("get-clientUsername" + "," + messageSplit[1]);
-                        this.clientUsername = messageSplit[1];
-                        ServerFrame.serverThreadBus.sendOnlineList();
-                        ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " has entered the chat.");
+                        if (!ServerFrame.serverThreadBus.isOnline(messageSplit[1])) {
+                            write("login_status" + "," + "successful");
+                            write("get-clientUsername" + "," + messageSplit[1]);
+                            this.clientUsername = messageSplit[1];
+                            ServerFrame.serverThreadBus.sendOnlineList();
+                            ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " has entered the chat.");
+                        } else {
+                            write("login_an_online_account" + "," + "true");
+                        }
                     } else {
                         write("login_status" + "," + "failed");
                     }

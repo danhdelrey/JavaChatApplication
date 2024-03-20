@@ -99,6 +99,11 @@ public class ClientFrame extends javax.swing.JFrame {
                                         System.out.println("dang ky that bai");
                                     }
                                 }
+                                if (messageSplit[0].equals("login_an_online_account")) {
+                                    if (messageSplit[1].equals("true")) {
+                                        JOptionPane.showMessageDialog(rootPane, "The account is currently online!");
+                                    }
+                                }
                             }
 
                         } catch (UnknownHostException e) {
