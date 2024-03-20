@@ -45,6 +45,12 @@ public class DangNhap extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
+        txt_pass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_passKeyPressed(evt);
+            }
+        });
+
         Login_b.setText("Đăng nhập");
         Login_b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +151,10 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_Login_bActionPerformed
 
     private void Login_bKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Login_bKeyPressed
+        
+    }//GEN-LAST:event_Login_bKeyPressed
+
+    private void txt_passKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String username = txt_name.getText();
             String password = txt_pass.getText();
@@ -161,7 +171,7 @@ public class DangNhap extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
         }
-    }//GEN-LAST:event_Login_bKeyPressed
+    }//GEN-LAST:event_txt_passKeyPressed
 
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */

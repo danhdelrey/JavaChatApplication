@@ -32,6 +32,12 @@ public class DangKy extends javax.swing.JFrame {
         Dangky_label.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         Dangky_label.setText("SIGN UP");
 
+        txtpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpassKeyPressed(evt);
+            }
+        });
+
         passL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         passL.setText("Password:");
 
@@ -158,6 +164,10 @@ public class DangKy extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void dangky_BKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dangky_BKeyPressed
+        
+    }//GEN-LAST:event_dangky_BKeyPressed
+
+    private void txtpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpassKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String username = txtname.getText();
             String password = txtpass.getText();
@@ -189,7 +199,7 @@ public class DangKy extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
         }
-    }//GEN-LAST:event_dangky_BKeyPressed
+    }//GEN-LAST:event_txtpassKeyPressed
 
     /**
      * @param args the command line arguments
