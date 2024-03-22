@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 import javax.swing.JOptionPane;
 
 /**
@@ -87,6 +90,20 @@ public class ServerThread implements Runnable {
                         write("signup_status" + "," + "failed");
                         System.out.println("dang ky that bai");
                     }
+                }
+
+                if (messageSplit[0].equals("send-file")) {
+                    String base64FileData = messageSplit[1];
+                    String fileName = messageSplit[2];
+                    String senderUsername = messageSplit[3];
+
+                    byte[] fileData = Base64.getDecoder().decode(base64FileData);
+
+                    // Lưu file vào máy chủ (hoặc thực hiện các xử lý khác)
+                    Files.write(Paths.get(fileName), fileData);
+
+                    // Gửi thông báo cho các client khác (hoặc thực hiện các xử lý khác)
+                    ServerFrame.serverThreadBus.broadCast(senderUsername, "global-message" + "," + senderUsername + " đã gửi file: " + fileName);
                 }
             }
         } catch (IOException e) {

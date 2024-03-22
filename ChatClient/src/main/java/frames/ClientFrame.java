@@ -411,26 +411,28 @@ public class ClientFrame extends javax.swing.JFrame {
             //Lấy file mà người dùng đã chọn từ hộp thoại.
             File selectedFile = fileChooser.getSelectedFile();
 
-            //Lấy tên của file đã chọn.
-            String fileName = selectedFile.getName();
             try {
 
                 // Đọc dữ liệu từ file
                 byte[] fileData = Files.readAllBytes(selectedFile.toPath());
                 String base64FileData = Base64.getEncoder().encodeToString(fileData);
 
-                // Gửi file
-                if (jComboBox1.getSelectedIndex() == 0) {
-                    write("send-file-to-global" + "," + fileName + "," + base64FileData);
-                } else {
-                    String selectedUsername = (String) jComboBox1.getSelectedItem();
-                    write("send-file-to-person" + "," + selectedUsername + "," + fileName + "," + base64FileData);
-                }
+                // Gửi tin nhắn chứa dữ liệu file
+                sendFileMessage(base64FileData, selectedFile.getName());
+
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra khi đọc file");
             }
         }
     }//GEN-LAST:event_Send_file_ButtonActionPerformed
+
+    private void sendFileMessage(String base64FileData, String fileName) {
+        try {
+            write("send-file" + "," + base64FileData + "," + fileName + "," + this.clientUsername);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra khi gửi file");
+        }
+    }
 
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
 
