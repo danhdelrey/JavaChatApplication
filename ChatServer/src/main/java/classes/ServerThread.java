@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 import javax.swing.JOptionPane;
@@ -99,8 +100,12 @@ public class ServerThread implements Runnable {
 
                     byte[] fileData = Base64.getDecoder().decode(base64FileData);
 
-                    // Lưu file vào máy chủ (hoặc thực hiện các xử lý khác)
-                    Files.write(Paths.get(fileName), fileData);
+                    //Tạo đường dẫn để lưu file vào server
+                    String pathToSave = "./src/main/resources/";
+                    Path filePath = Paths.get(pathToSave, fileName);
+
+                    // Lưu file vào đường dẫn đã tạo
+                    Files.write(filePath, fileData);
 
                     // Gửi thông báo cho các client khác (hoặc thực hiện các xử lý khác)
                     ServerFrame.serverThreadBus.broadCast(senderUsername, "global-message" + "," + senderUsername + " đã gửi file: " + fileName);

@@ -34,6 +34,7 @@ public class ClientFrame extends javax.swing.JFrame {
     public boolean isLoggedIn = false;
 
     public static DangNhap dangNhap;
+    public static FilesFrame filesFrame;
 
     /**
      * Creates new form ClientFrame
@@ -46,6 +47,7 @@ public class ClientFrame extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea2.setEditable(false);
         onlineList = new ArrayList<>();
+        filesFrame = new FilesFrame();
         setUpSocket();
 
     }
@@ -482,7 +484,8 @@ public class ClientFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        filesFrame.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
