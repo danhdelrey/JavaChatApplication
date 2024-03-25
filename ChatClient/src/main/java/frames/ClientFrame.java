@@ -369,12 +369,15 @@ public class ClientFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String messageContent = jTextField1.getText();
-
+    String getCurrentDateTime() {
         LocalDateTime date = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDate = date.format(myFormatObj);
+        String currentDateTime = date.format(myFormatObj);
+        return currentDateTime;
+    }
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String messageContent = jTextField1.getText();
 
         if (messageContent.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tin nhắn");
@@ -383,7 +386,7 @@ public class ClientFrame extends javax.swing.JFrame {
         if (jComboBox1.getSelectedIndex() == 0) {
             try {
                 write("send-to-global" + "," + messageContent + "," + this.clientUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
+                jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
@@ -392,7 +395,7 @@ public class ClientFrame extends javax.swing.JFrame {
             try {
                 String selectedUsername = (String) jComboBox1.getSelectedItem();
                 write("send-to-person" + "," + messageContent + "," + selectedUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + formattedDate + "\n\n");
+                jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
             } catch (IOException ex) {
@@ -421,27 +424,39 @@ public class ClientFrame extends javax.swing.JFrame {
             //Lấy file mà người dùng đã chọn từ hộp thoại.
             File selectedFile = fileChooser.getSelectedFile();
 
-            try {
+            String fileName = selectedFile.getName();
 
-                // Đọc dữ liệu từ file
-                byte[] fileData = Files.readAllBytes(selectedFile.toPath());
-                String base64FileData = Base64.getEncoder().encodeToString(fileData);
+            //Tìm kích thước của file ở dạng mb
+            long fileSizeInBytes = selectedFile.length();
+            float fileSizeInMB = (float) fileSizeInBytes / (1024 * 1024);
 
-                // Gửi tin nhắn chứa dữ liệu file
-                sendFileMessage(base64FileData, selectedFile.getName());
+            if (fileSizeInMB <= 5) {
+                try {
 
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra khi đọc file");
+                    // Đọc dữ liệu từ file
+                    byte[] fileData = Files.readAllBytes(selectedFile.toPath());
+                    String base64FileData = Base64.getEncoder().encodeToString(fileData);
+
+                    // Gửi tin nhắn chứa dữ liệu file
+                    sendFileMessage(base64FileData, fileName, fileSizeInMB, getCurrentDateTime());
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra khi đọc file");
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "File has a maximum size of 5MB");
             }
+
         }
     }//GEN-LAST:event_Send_file_ButtonActionPerformed
 
-    private void sendFileMessage(String base64FileData, String fileName) {
+    private void sendFileMessage(String base64FileData, String fileName, float fileSize, String dateTime) {
         try {
-            write("send-file" + "," + base64FileData + "," + fileName + "," + this.clientUsername);
+            write("send-file" + "," + base64FileData + "," + fileName + "," + this.clientUsername + "," + fileSize + "," + dateTime);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra khi gửi file");
         }
+
     }
 
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed

@@ -97,6 +97,8 @@ public class ServerThread implements Runnable {
                     String base64FileData = messageSplit[1];
                     String fileName = messageSplit[2];
                     String senderUsername = messageSplit[3];
+                    float fileSize = Float.parseFloat(messageSplit[4]);
+                    String dateTime = messageSplit[5];
 
                     byte[] fileData = Base64.getDecoder().decode(base64FileData);
 
