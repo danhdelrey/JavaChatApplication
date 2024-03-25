@@ -41,7 +41,7 @@ public class ServerThreadBus {
 
     public void broadCast(String clientUsername, String message) {
         for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
-            if (serverThread.getClientUsername() == clientUsername) {
+            if (serverThread.getClientUsername().equals(clientUsername)) {
                 continue;
             } else {
                 try {
@@ -53,8 +53,19 @@ public class ServerThreadBus {
         }
     }
 
-    public void sendFileToGlobal(String base64FileData, String fileName, float fileSize, String dateTime) {
-
+    //cập nhật table và hiển thị lên box chat ai đã gửi file gì
+    public void sendFileToGlobal(String clientUsername, String fileName, float fileSize, String dateTime, String message) {
+        for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
+            if (serverThread.getClientUsername().equals(clientUsername)) {
+                continue;
+            } else {
+                try {
+                    serverThread.write("update-file-list-global" + "," + clientUsername + "," + fileName + "," + fileSize + "," + dateTime + "," + message);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
     }
 
     public int getLength() {

@@ -146,12 +146,15 @@ public class ClientFrame extends javax.swing.JFrame {
                                     updateCombobox(onlineList);
                                 }
                                 if (messageSplit[0].equals("global-message")) {
-                                    LocalDateTime date = LocalDateTime.now();
-                                    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                                    String formattedDate = date.format(myFormatObj);
 
-                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n" + formattedDate + "\n\n");
+                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n" + getCurrentDateTime() + "\n\n");
                                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                                }
+                                if (messageSplit[0].equals("update-file-list-global")) { //fix không hiển thị file của mình gửi trong table (người khác thì có)
+                                    filesFrame.addFileToTable(messageSplit[1], messageSplit[2], Float.parseFloat(messageSplit[3]), messageSplit[4]);
+                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[5] + "\n" + getCurrentDateTime() + "\n\n");
+                                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+
                                 }
 
                             }
@@ -453,7 +456,7 @@ public class ClientFrame extends javax.swing.JFrame {
     private void sendFileMessage(String base64FileData, String fileName, float fileSize, String dateTime) {
         if (jComboBox1.getSelectedIndex() == 0) {
             try {
-                write("send-file-to-global" + "," + base64FileData + "," + fileName + "," + this.clientUsername + "," + fileSize + "," + dateTime);
+                write("send-file-to-global" + "," + base64FileData + "," + this.clientUsername + "," + fileName + "," + fileSize + "," + dateTime);
                 jTextArea1.setText(jTextArea1.getText() + "You has sent a file: " + fileName + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
@@ -462,7 +465,7 @@ public class ClientFrame extends javax.swing.JFrame {
         } else {
             try {
                 String selectedUsername = (String) jComboBox1.getSelectedItem();
-                write("send-file-to-person" + "," + base64FileData + "," + fileName + "," + this.clientUsername + "," + fileSize + "," + dateTime + "," + selectedUsername);
+                write("send-file-to-person" + "," + base64FileData + "," + this.clientUsername + "," + fileName + "," + fileSize + "," + dateTime + "," + selectedUsername);
                 jTextArea1.setText(jTextArea1.getText() + "You has sent a file (to " + selectedUsername + "): " + fileName + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 

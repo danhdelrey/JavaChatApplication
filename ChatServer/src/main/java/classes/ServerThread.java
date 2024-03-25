@@ -15,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -93,31 +95,13 @@ public class ServerThread implements Runnable {
                     }
                 }
 
-//                if (messageSplit[0].equals("send-file")) {
-//                    String base64FileData = messageSplit[1];
-//                    String fileName = messageSplit[2];
-//                    String senderUsername = messageSplit[3];
-//                    float fileSize = Float.parseFloat(messageSplit[4]);
-//                    String dateTime = messageSplit[5];
-//
-//                    byte[] fileData = Base64.getDecoder().decode(base64FileData);
-//
-//                    //Tạo đường dẫn để lưu file vào server
-//                    String pathToSave = "./src/main/resources/";
-//                    Path filePath = Paths.get(pathToSave, fileName);
-//
-//                    // Lưu file vào đường dẫn đã tạo
-//                    Files.write(filePath, fileData);
-//
-//                    // Gửi thông báo cho các client khác (hoặc thực hiện các xử lý khác)
-//                    ServerFrame.serverThreadBus.broadCast(senderUsername, "global-message" + "," + senderUsername + " đã gửi file: " + fileName);
-//                }
                 if (messageSplit[0].equals("send-file-to-global")) {
-
+                    saveFileToServer(messageSplit[1], messageSplit[3]);
+                    ServerFrame.serverThreadBus.sendFileToGlobal(messageSplit[2], messageSplit[3], Float.parseFloat(messageSplit[4]), messageSplit[5], this.clientUsername + " has sent a file: " + messageSplit[3]);
                 }
-                if (messageSplit[0].equals("send-file-to-person")) {
-
-                }
+//                if (messageSplit[0].equals("send-file-to-person")) {
+//                    saveFileToServer(messageSplit[1], messageSplit[3]);
+//                }
             }
         } catch (IOException e) {
             isClosed = true;
@@ -125,6 +109,22 @@ public class ServerThread implements Runnable {
             ServerFrame.logMessage(this.getClientUsername() + " has left the chat.");
             ServerFrame.serverThreadBus.sendOnlineList();
             ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " has left the chat.");
+        }
+    }
+
+    //lưu file vào thư mục resources của server, khi nào client yêu cầu tải thì server sẽ từ đó mà gửi file
+    void saveFileToServer(String base64FileData, String fileName) {
+        byte[] fileData = Base64.getDecoder().decode(base64FileData);
+
+        //Tạo đường dẫn để lưu file vào server
+        String pathToSave = "./src/main/resources/";
+        Path filePath = Paths.get(pathToSave, fileName);
+
+        try {
+            // Lưu file vào đường dẫn đã tạo
+            Files.write(filePath, fileData);
+        } catch (IOException ex) {
+            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
