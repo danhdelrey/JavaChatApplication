@@ -53,6 +53,10 @@ public class ServerThreadBus {
         }
     }
 
+    public void sendFileToGlobal(String base64FileData, String fileName, float fileSize, String dateTime) {
+
+    }
+
     public int getLength() {
         return listServerThreads.size();
     }

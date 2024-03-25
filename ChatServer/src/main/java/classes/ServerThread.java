@@ -93,24 +93,30 @@ public class ServerThread implements Runnable {
                     }
                 }
 
-                if (messageSplit[0].equals("send-file")) {
-                    String base64FileData = messageSplit[1];
-                    String fileName = messageSplit[2];
-                    String senderUsername = messageSplit[3];
-                    float fileSize = Float.parseFloat(messageSplit[4]);
-                    String dateTime = messageSplit[5];
+//                if (messageSplit[0].equals("send-file")) {
+//                    String base64FileData = messageSplit[1];
+//                    String fileName = messageSplit[2];
+//                    String senderUsername = messageSplit[3];
+//                    float fileSize = Float.parseFloat(messageSplit[4]);
+//                    String dateTime = messageSplit[5];
+//
+//                    byte[] fileData = Base64.getDecoder().decode(base64FileData);
+//
+//                    //Tạo đường dẫn để lưu file vào server
+//                    String pathToSave = "./src/main/resources/";
+//                    Path filePath = Paths.get(pathToSave, fileName);
+//
+//                    // Lưu file vào đường dẫn đã tạo
+//                    Files.write(filePath, fileData);
+//
+//                    // Gửi thông báo cho các client khác (hoặc thực hiện các xử lý khác)
+//                    ServerFrame.serverThreadBus.broadCast(senderUsername, "global-message" + "," + senderUsername + " đã gửi file: " + fileName);
+//                }
+                if (messageSplit[0].equals("send-file-to-global")) {
 
-                    byte[] fileData = Base64.getDecoder().decode(base64FileData);
+                }
+                if (messageSplit[0].equals("send-file-to-person")) {
 
-                    //Tạo đường dẫn để lưu file vào server
-                    String pathToSave = "./src/main/resources/";
-                    Path filePath = Paths.get(pathToSave, fileName);
-
-                    // Lưu file vào đường dẫn đã tạo
-                    Files.write(filePath, fileData);
-
-                    // Gửi thông báo cho các client khác (hoặc thực hiện các xử lý khác)
-                    ServerFrame.serverThreadBus.broadCast(senderUsername, "global-message" + "," + senderUsername + " đã gửi file: " + fileName);
                 }
             }
         } catch (IOException e) {

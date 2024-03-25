@@ -451,12 +451,25 @@ public class ClientFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Send_file_ButtonActionPerformed
 
     private void sendFileMessage(String base64FileData, String fileName, float fileSize, String dateTime) {
-        try {
-            write("send-file" + "," + base64FileData + "," + fileName + "," + this.clientUsername + "," + fileSize + "," + dateTime);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra khi gửi file");
-        }
+        if (jComboBox1.getSelectedIndex() == 0) {
+            try {
+                write("send-file-to-global" + "," + base64FileData + "," + fileName + "," + this.clientUsername + "," + fileSize + "," + dateTime);
+                jTextArea1.setText(jTextArea1.getText() + "You has sent a file: " + fileName + "\n" + getCurrentDateTime() + "\n\n");
+                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            }
+        } else {
+            try {
+                String selectedUsername = (String) jComboBox1.getSelectedItem();
+                write("send-file-to-person" + "," + base64FileData + "," + fileName + "," + this.clientUsername + "," + fileSize + "," + dateTime + "," + selectedUsername);
+                jTextArea1.setText(jTextArea1.getText() + "You has sent a file (to " + selectedUsername + "): " + fileName + "\n" + getCurrentDateTime() + "\n\n");
+                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            }
+        }
     }
 
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
