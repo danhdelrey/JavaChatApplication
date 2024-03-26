@@ -150,7 +150,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                     jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n" + getCurrentDateTime() + "\n\n");
                                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
                                 }
-                                if (messageSplit[0].equals("update-file-list-global")) { //fix không hiển thị file của mình gửi trong table (người khác thì có)
+                                if (messageSplit[0].equals("update-file-list")) {
                                     filesFrame.addFileToTable(messageSplit[1], messageSplit[2], Float.parseFloat(messageSplit[3]), messageSplit[4]);
                                     jTextArea1.setText(jTextArea1.getText() + messageSplit[5] + "\n" + getCurrentDateTime() + "\n\n");
                                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());

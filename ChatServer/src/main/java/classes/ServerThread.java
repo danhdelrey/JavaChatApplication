@@ -96,8 +96,8 @@ public class ServerThread implements Runnable {
                 }
 
                 if (messageSplit[0].equals("send-file-to-global")) {
-                    saveFileToServer(messageSplit[1], messageSplit[3]);
-                    ServerFrame.serverThreadBus.sendFileToGlobal(messageSplit[2], messageSplit[3], Float.parseFloat(messageSplit[4]), messageSplit[5], this.clientUsername + " has sent a file: " + messageSplit[3]);
+                    saveFileToServer(messageSplit[1], messageSplit[2], messageSplit[3], messageSplit[5]);
+                    ServerFrame.serverThreadBus.updateFileListGlobal(messageSplit[2], messageSplit[3], Float.parseFloat(messageSplit[4]), messageSplit[5], this.clientUsername + " has sent a file: " + messageSplit[3]);
                 }
 //                if (messageSplit[0].equals("send-file-to-person")) {
 //                    saveFileToServer(messageSplit[1], messageSplit[3]);
@@ -113,12 +113,22 @@ public class ServerThread implements Runnable {
     }
 
     //lưu file vào thư mục resources của server, khi nào client yêu cầu tải thì server sẽ từ đó mà gửi file
-    void saveFileToServer(String base64FileData, String fileName) {
+    void saveFileToServer(String base64FileData, String clientUsername, String fileName, String dateTime) {
         byte[] fileData = Base64.getDecoder().decode(base64FileData);
 
         //Tạo đường dẫn để lưu file vào server
-        String pathToSave = "./src/main/resources/";
+        String pathToSave = "./src/main/resources/" + clientUsername + "/";
         Path filePath = Paths.get(pathToSave, fileName);
+
+        // Kiểm tra và tạo thư mục nếu nó không tồn tại
+        Path directoryPath = Paths.get("./src/main/resources/", clientUsername);
+        if (!Files.exists(directoryPath)) {
+            try {
+                Files.createDirectories(directoryPath);
+            } catch (IOException ex) {
+                Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
         try {
             // Lưu file vào đường dẫn đã tạo
