@@ -54,13 +54,26 @@ public class ServerThreadBus {
     }
 
     //cập nhật table và hiển thị lên box chat ai đã gửi file gì
-    public void updateFileListGlobal(String clientUsername, String fileName, float fileSize, String dateTime, String message) {
+    public void updateFileListGlobal(String senderUsername, String fileName, float fileSize, String dateTime, String message) {
         for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
-            if (serverThread.getClientUsername().equals(clientUsername)) {
+            if (serverThread.getClientUsername().equals(senderUsername)) {
                 continue;
             } else {
                 try {
-                    serverThread.write("update-file-list" + "," + clientUsername + "," + fileName + "," + fileSize + "," + dateTime + "," + message);
+                    serverThread.write("update-file-list" + "," + senderUsername + "," + fileName + "," + fileSize + "," + dateTime + "," + message);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void updateFileListPerson(String senderUsername, String recipientUsername, String fileName, float fileSize, String dateTime, String message) {
+        for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
+            if (serverThread.getClientUsername().equals(recipientUsername)) {
+                try {
+                    serverThread.write("update-file-list" + "," + senderUsername + "," + fileName + "," + fileSize + "," + dateTime + "," + message);
+                    break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
