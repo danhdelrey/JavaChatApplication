@@ -58,6 +58,7 @@ public class ServerFrame extends javax.swing.JFrame {
                 TimeUnit.SECONDS,
                 new ArrayBlockingQueue<>(8) // queueCapacity
         );
+
         try {
             while (true) {
                 // Chấp nhận một yêu cầu kết nối từ phía Client.
@@ -78,6 +79,7 @@ public class ServerFrame extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+
     }
 
     public static void logMessage(String message) {

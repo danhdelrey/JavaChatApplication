@@ -7,6 +7,7 @@ package classes;
 import frames.ServerFrame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -137,6 +138,30 @@ public class ServerThread implements Runnable {
         } catch (IOException ex) {
             Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void sendFileToClient(String clientUsername, String sender, String fileName) {
+        String directoryPath = "./src/main/resources/" + sender + "/";
+        // Tạo một đối tượng File đại diện cho thư mục
+        File directory = new File(directoryPath);
+
+        // Kiểm tra xem nó có tồn tại và có phải là thư mục không
+        if (directory.exists() && directory.isDirectory()) {
+            // Lấy danh sách các tệp trong thư mục
+            File[] files = directory.listFiles();
+
+            // Lặp qua từng tệp
+            if (files != null) {
+                for (File file : files) {
+                    if (file.getName().equals(fileName)) {
+                        //gui filedata64 cho client
+                    }
+                }
+            }
+        } else {
+            System.out.println("Đường dẫn không tồn tại hoặc không phải là một thư mục.");
+        }
+
     }
 
     public void write(String message) throws IOException {
