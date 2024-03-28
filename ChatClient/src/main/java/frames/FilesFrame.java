@@ -4,6 +4,13 @@
  */
 package frames;
 
+import static frames.ClientFrame.os;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,9 +19,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FilesFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FilesFrame
-     */
+    private InputStream is;
+
+    public void setInputStream(InputStream inputStream) {
+        this.is = inputStream;
+    }
+
     public FilesFrame() {
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -34,8 +44,8 @@ public class FilesFrame extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Save_all = new javax.swing.JButton();
+        Save_the_selec = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -66,16 +76,21 @@ public class FilesFrame extends javax.swing.JFrame {
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Save all");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Save_all.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Save_all.setText("Save all");
+        Save_all.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Save_allActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Save the selected files");
+        Save_the_selec.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Save_the_selec.setText("Save the selected files");
+        Save_the_selec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Save_the_selecActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,9 +102,9 @@ public class FilesFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(Save_the_selec)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(Save_all)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -97,8 +112,8 @@ public class FilesFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(Save_the_selec)
+                    .addComponent(Save_all))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -107,16 +122,42 @@ public class FilesFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Save_allActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Save_allActionPerformed
+        // Hộp thoại chọn nơi lưu file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn nơi lưu file");
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        //Hiển thị hộp thoại chọn nơi lưu và lưu kết quả vào biến result.
+        int result = fileChooser.showSaveDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            // Tạo một luồng để ghi file tải về vào đường dẫn đã chọn
+            try (FileOutputStream fos = new FileOutputStream(selectedFile.getAbsolutePath())) {
+                // Đọc dữ liệu từ socket và ghi vào file
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = is.read(buffer)) != -1) {
+                    fos.write(buffer, 0, bytesRead);
+                }
+                JOptionPane.showMessageDialog(rootPane, "File đã được lưu thành công!");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra khi lưu file!");
+            }
+        }
+    }//GEN-LAST:event_Save_allActionPerformed
+
+    private void Save_the_selecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Save_the_selecActionPerformed
+
+    }//GEN-LAST:event_Save_the_selecActionPerformed
 
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Save_all;
+    private javax.swing.JButton Save_the_selec;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

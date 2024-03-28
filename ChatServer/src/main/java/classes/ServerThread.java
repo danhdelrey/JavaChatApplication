@@ -31,6 +31,7 @@ public class ServerThread implements Runnable {
     private BufferedReader is;
     private BufferedWriter os;
     private boolean isClosed;
+    
 
     public BufferedReader getIs() {
         return is;
@@ -140,6 +141,7 @@ public class ServerThread implements Runnable {
         }
     }
 
+    
     void sendFileToClient(String clientUsername, String sender, String fileName) {
         String directoryPath = "./src/main/resources/" + sender + "/";
         // Tạo một đối tượng File đại diện cho thư mục
@@ -161,9 +163,8 @@ public class ServerThread implements Runnable {
         } else {
             System.out.println("Đường dẫn không tồn tại hoặc không phải là một thư mục.");
         }
-
     }
-
+    
     public void write(String message) throws IOException {
         os.write(message);
         os.newLine();
