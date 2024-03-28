@@ -9,11 +9,15 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -29,7 +33,7 @@ public class ClientFrame extends javax.swing.JFrame {
     public static BufferedReader is;
     private Socket socketOfClient;
     private List<String> onlineList;
-    private String clientUsername;
+    public static String clientUsername;
 
     public boolean isLoggedIn = false;
 
@@ -64,7 +68,7 @@ public class ClientFrame extends javax.swing.JFrame {
                             // Gửi yêu cầu kết nối tới Server đang lắng nghe
                             // trên máy 'localhost' cổng 7777.
                             if (socketOfClient == null) {
-                                socketOfClient = new Socket("192.168.43.47", 7777);
+                                socketOfClient = new Socket("localhost", 7777);
                                 System.out.println("Kết nối thành công!");
                                 // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
                                 os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
@@ -156,6 +160,11 @@ public class ClientFrame extends javax.swing.JFrame {
                                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
                                 }
+                                if (messageSplit[0].equals("get-files")) {
+                                    for (int i = 1; i < messageSplit.length; i++) {
+                                        saveFileToClient(messageSplit[i], "\"C:\\Users\\Danh Del Rey\\Desktop\"");
+                                    }
+                                }
 
                             }
 //                    os.close();
@@ -204,6 +213,21 @@ public class ClientFrame extends javax.swing.JFrame {
     void successfulLogin() {
         isLoggedIn = true;
         this.setVisible(true);
+    }
+
+    //chưa chọn đường dẫn để lưu file, chưa nhận tên files
+    void saveFileToClient(String base64FileData, String pathToSave) {
+        byte[] fileData = Base64.getDecoder().decode(base64FileData);
+
+        //Tạo đường dẫn để lưu file vào client
+        Path filePath = Paths.get(pathToSave, "hi");
+
+        try {
+            // Lưu file vào đường dẫn đã tạo
+            Files.write(filePath, fileData);
+        } catch (IOException ex) {
+
+        }
     }
 
     public static void main(String args[]) {

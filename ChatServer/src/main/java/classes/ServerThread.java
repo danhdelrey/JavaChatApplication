@@ -104,6 +104,9 @@ public class ServerThread implements Runnable {
                     saveFileToServer(messageSplit[1], messageSplit[2], messageSplit[3], messageSplit[5]);
                     ServerFrame.serverThreadBus.updateFileListPerson(messageSplit[2], messageSplit[6], messageSplit[3], Float.parseFloat(messageSplit[4]), messageSplit[5], messageSplit[2] + " has sent a file: " + messageSplit[3] + " (to you)");
                 }
+                if (messageSplit[0].equals("request-save-all-files")) {
+                    sendAllFilesToClient(messageSplit[1]);
+                }
             }
         } catch (IOException e) {
             isClosed = true;
@@ -140,28 +143,44 @@ public class ServerThread implements Runnable {
         }
     }
 
-    void sendFileToClient(String clientUsername, String sender, String fileName) {
-        String directoryPath = "./src/main/resources/" + sender + "/";
+    //chuyển đổi một file thành dạng chuỗi fileData
+    String getFileData(File file) {
+        try {
+            byte[] fileData = Files.readAllBytes(file.toPath());
+            String base64FileData = Base64.getEncoder().encodeToString(fileData);
+            return base64FileData;
+        } catch (IOException ex) {
+            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    void sendAllFilesToClient(String clientUsername) {
+        String allFileData = "";
+
+        String directoryPath = "./src/main/resources/";
         // Tạo một đối tượng File đại diện cho thư mục
-        File directory = new File(directoryPath);
-
+        File rootDirectory = new File(directoryPath);
         // Kiểm tra xem nó có tồn tại và có phải là thư mục không
-        if (directory.exists() && directory.isDirectory()) {
+        if (rootDirectory.exists() && rootDirectory.isDirectory()) {
             // Lấy danh sách các tệp trong thư mục
-            File[] files = directory.listFiles();
-
+            File[] allSenderDirectories = rootDirectory.listFiles();
             // Lặp qua từng tệp
-            if (files != null) {
-                for (File file : files) {
-                    if (file.getName().equals(fileName)) {
-                        //gui filedata64 cho client
+            if (allSenderDirectories != null) {
+                for (File senderDirectory : allSenderDirectories) {
+                    File[] senderFiles = senderDirectory.listFiles();
+                    if (senderFiles != null) {
+                        for (File file : senderFiles) {
+                            allFileData = allFileData + getFileData(file) + ",";
+                        }
                     }
+
                 }
             }
         } else {
             System.out.println("Đường dẫn không tồn tại hoặc không phải là một thư mục.");
         }
-
+        ServerFrame.serverThreadBus.sendFileToPerson(clientUsername, allFileData);
     }
 
     public void write(String message) throws IOException {

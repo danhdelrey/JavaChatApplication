@@ -107,6 +107,19 @@ public class ServerThreadBus {
         }
     }
 
+    public void sendFileToPerson(String clientUsername, String message) {
+        for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
+            if (serverThread.getClientUsername().equals(clientUsername)) {
+                try {
+                    serverThread.write("get-files" + "," + message);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void remove(String clientUsername) {
         for (int i = 0; i < ServerFrame.serverThreadBus.getLength(); i++) {
             if (ServerFrame.serverThreadBus.getListServerThreads().get(i).getClientUsername().equals(clientUsername)) {
