@@ -64,7 +64,7 @@ public class ClientFrame extends javax.swing.JFrame {
                             // Gửi yêu cầu kết nối tới Server đang lắng nghe
                             // trên máy 'localhost' cổng 7777.
                             if (socketOfClient == null) {
-                                socketOfClient = new Socket("192.168.56.1", 7777);
+                                socketOfClient = new Socket("192.168.43.47", 7777);
                                 System.out.println("Kết nối thành công!");
                                 // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
                                 os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
