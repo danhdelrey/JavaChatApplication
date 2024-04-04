@@ -172,6 +172,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                         saveFileToClient(fileData[i], fileNames[i], pathToSave);
                                     }
                                     JOptionPane.showMessageDialog(rootPane, "Saved files successfully!");
+                                    filesFrame.setVisible(false);
                                 }
 
                             }
@@ -552,7 +553,28 @@ public class ClientFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setDialogTitle("Choose a directory to save");
+
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String fileName = "backupchat.txt";
+            String fileData = jTextArea1.getText();
+            String selectedPath = fileChooser.getSelectedFile().getPath() + "\\" + fileName;
+
+            File file = new File(selectedPath);
+            try {
+                FileWriter fileWriter = new FileWriter(selectedPath);
+                fileWriter.write(fileData);
+                fileWriter.close();
+            } catch (Exception exception) {
+                System.out.println(exception.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+        }
+        JOptionPane.showMessageDialog(rootPane, "Saved successfully!");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

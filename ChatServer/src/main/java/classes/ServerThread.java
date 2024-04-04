@@ -167,7 +167,6 @@ public class ServerThread implements Runnable {
             String fileInfo[] = files[i].split(";;;;;");
             String sender = fileInfo[0];
             String fileName = fileInfo[1];
-            System.out.println(sender + "     " + fileName);
 
             String filePath = "./src/main/resources/" + sender + "/" + fileName;
             File file = new File(filePath);
