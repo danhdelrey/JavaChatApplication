@@ -7,6 +7,8 @@ package frames;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -111,11 +113,36 @@ public class FilesFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            ClientFrame.write("request-save-all-files" + "," + ClientFrame.clientUsername);
-        } catch (IOException ex) {
-            Logger.getLogger(FilesFrame.class.getName()).log(Level.SEVERE, null, ex);
+        String fileToSave = "";
+        if (jTable1.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "No files to download!");
+        } else {
+            // Lặp qua các dòng
+            for (int row = 0; row < jTable1.getRowCount(); row++) {
+                // Lặp qua 2 cột usernaem với filename
+                for (int col = 0; col < 2; col++) {
+                    String fileInfo = (String) jTable1.getValueAt(row, col);
+                    fileToSave = fileToSave + fileInfo + ";;;;;";
+                }
+                fileToSave = fileToSave + ":::::";
+            }
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileChooser.setDialogTitle("Choose a directory to save");
+
+            int result = fileChooser.showOpenDialog(this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                String selectedPath = fileChooser.getSelectedFile().getPath() + "\\";
+                try {
+                    ClientFrame.write("request-save-all-files" + "," + ClientFrame.clientUsername + "," + selectedPath + "," + fileToSave);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            }
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

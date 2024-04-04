@@ -161,9 +161,17 @@ public class ClientFrame extends javax.swing.JFrame {
 
                                 }
                                 if (messageSplit[0].equals("get-files")) {
-                                    for (int i = 1; i < messageSplit.length; i++) {
-                                        saveFileToClient(messageSplit[i], "\"C:\\Users\\Danh Del Rey\\Desktop\"");
+
+                                    String messages[] = message.split("&:::::&");
+
+                                    String fileData[] = messages[1].split(";:::::;");
+                                    String fileNames[] = messages[2].split(";:::::;");
+                                    String pathToSave = messages[3];
+
+                                    for (int i = 0; i < fileData.length; i++) {
+                                        saveFileToClient(fileData[i], fileNames[i], pathToSave);
                                     }
+                                    JOptionPane.showMessageDialog(rootPane, "Saved files successfully!");
                                 }
 
                             }
@@ -215,22 +223,22 @@ public class ClientFrame extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
-    //chưa chọn đường dẫn để lưu file, chưa nhận tên files
-    void saveFileToClient(String base64FileData, String pathToSave) {
+    void saveFileToClient(String base64FileData, String fileName, String pathToSave) {
         byte[] fileData = Base64.getDecoder().decode(base64FileData);
 
         //Tạo đường dẫn để lưu file vào client
-        Path filePath = Paths.get(pathToSave, "hi");
+        Path filePath = Paths.get(pathToSave, fileName);
 
         try {
             // Lưu file vào đường dẫn đã tạo
             Files.write(filePath, fileData);
         } catch (IOException ex) {
-
+            System.out.println("khong luu dc file");
         }
     }
 
     public static void main(String args[]) {
+
         ClientFrame clientFrame = new ClientFrame();
 
     }

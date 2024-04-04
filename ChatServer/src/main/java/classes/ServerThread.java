@@ -15,7 +15,9 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -105,7 +107,7 @@ public class ServerThread implements Runnable {
                     ServerFrame.serverThreadBus.updateFileListPerson(messageSplit[2], messageSplit[6], messageSplit[3], Float.parseFloat(messageSplit[4]), messageSplit[5], messageSplit[2] + " has sent a file: " + messageSplit[3] + " (to you)");
                 }
                 if (messageSplit[0].equals("request-save-all-files")) {
-                    sendAllFilesToClient(messageSplit[1]);
+                    sendAllFilesToClient(messageSplit[1], messageSplit[2], messageSplit[3]);
                 }
             }
         } catch (IOException e) {
@@ -155,32 +157,50 @@ public class ServerThread implements Runnable {
         return null;
     }
 
-    void sendAllFilesToClient(String clientUsername) {
+    void sendAllFilesToClient(String clientUsername, String pathToSave, String filesToSend) {
         String allFileData = "";
+        String allFilenames = "";
 
-        String directoryPath = "./src/main/resources/";
-        // Tạo một đối tượng File đại diện cho thư mục
-        File rootDirectory = new File(directoryPath);
-        // Kiểm tra xem nó có tồn tại và có phải là thư mục không
-        if (rootDirectory.exists() && rootDirectory.isDirectory()) {
-            // Lấy danh sách các tệp trong thư mục
-            File[] allSenderDirectories = rootDirectory.listFiles();
-            // Lặp qua từng tệp
-            if (allSenderDirectories != null) {
-                for (File senderDirectory : allSenderDirectories) {
-                    File[] senderFiles = senderDirectory.listFiles();
-                    if (senderFiles != null) {
-                        for (File file : senderFiles) {
-                            allFileData = allFileData + getFileData(file) + ",";
-                        }
-                    }
+        String files[] = filesToSend.split(":::::");
 
-                }
-            }
-        } else {
-            System.out.println("Đường dẫn không tồn tại hoặc không phải là một thư mục.");
+        for (int i = 0; i < files.length; i++) {
+            String fileInfo[] = files[i].split(";;;;;");
+            String sender = fileInfo[0];
+            String fileName = fileInfo[1];
+            System.out.println(sender + "     " + fileName);
+
+            String filePath = "./src/main/resources/" + sender + "/" + fileName;
+            File file = new File(filePath);
+            allFileData = allFileData + getFileData(file) + ";:::::;";
+            allFilenames = allFilenames + file.getName() + ";:::::;";
         }
-        ServerFrame.serverThreadBus.sendFileToPerson(clientUsername, allFileData);
+
+//        // Tạo một đối tượng File đại diện cho thư mục
+//        File rootDirectory = new File(directoryPath);
+//        // Kiểm tra xem nó có tồn tại và có phải là thư mục không
+//        if (rootDirectory.exists() && rootDirectory.isDirectory()) {
+//            // Lấy danh sách các tệp trong thư mục
+//            File[] allSenderDirectories = rootDirectory.listFiles();
+//            // Lặp qua từng tệp
+//            if (allSenderDirectories != null) {
+//                for (File senderDirectory : allSenderDirectories) {
+//
+//                    File[] senderFiles = senderDirectory.listFiles();
+//                    if (senderFiles != null) {
+//                        for (File file : senderFiles) {
+//                            allFileData = allFileData + getFileData(file) + ";:::::;";
+//                            allFilenames = allFilenames + file.getName() + ";:::::;";
+//
+//                        }
+//                    }
+//
+//                }
+//            }
+//
+//        } else {
+//            System.out.println("Đường dẫn không tồn tại hoặc không phải là một thư mục.");
+//        }
+        ServerFrame.serverThreadBus.sendFileToPerson(clientUsername, "&:::::&" + allFileData + "&:::::&" + allFilenames + "&:::::&" + pathToSave);
     }
 
     public void write(String message) throws IOException {

@@ -112,6 +112,7 @@ public class ServerThreadBus {
             if (serverThread.getClientUsername().equals(clientUsername)) {
                 try {
                     serverThread.write("get-files" + "," + message);
+
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
