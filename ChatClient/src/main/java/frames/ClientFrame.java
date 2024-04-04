@@ -171,8 +171,8 @@ public class ClientFrame extends javax.swing.JFrame {
                                     for (int i = 0; i < fileData.length; i++) {
                                         saveFileToClient(fileData[i], fileNames[i], pathToSave);
                                     }
-                                    JOptionPane.showMessageDialog(rootPane, "Saved files successfully!");
-                                    filesFrame.setVisible(false);
+                                    filesFrame.showMessageDialog("Files are saved successfully.");
+
                                 }
 
                             }

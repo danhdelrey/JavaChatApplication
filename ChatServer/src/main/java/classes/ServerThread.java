@@ -106,7 +106,7 @@ public class ServerThread implements Runnable {
                     saveFileToServer(messageSplit[1], messageSplit[2], messageSplit[3], messageSplit[5]);
                     ServerFrame.serverThreadBus.updateFileListPerson(messageSplit[2], messageSplit[6], messageSplit[3], Float.parseFloat(messageSplit[4]), messageSplit[5], messageSplit[2] + " has sent a file: " + messageSplit[3] + " (to you)");
                 }
-                if (messageSplit[0].equals("request-save-all-files")) {
+                if (messageSplit[0].equals("request-save-files")) {
                     sendAllFilesToClient(messageSplit[1], messageSplit[2], messageSplit[3]);
                 }
             }

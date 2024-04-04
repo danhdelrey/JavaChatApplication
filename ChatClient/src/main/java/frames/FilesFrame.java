@@ -33,6 +33,10 @@ public class FilesFrame extends javax.swing.JFrame {
         table.addRow(row);
     }
 
+    public void showMessageDialog(String message) {
+        JOptionPane.showMessageDialog(rootPane, message);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,6 +85,11 @@ public class FilesFrame extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setText("Save the selected files");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,7 +122,7 @@ public class FilesFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String fileToSave = "";
+        String fileInfoToSave = "";
         if (jTable1.getRowCount() == 0) {
             JOptionPane.showMessageDialog(rootPane, "No files to download!");
         } else {
@@ -122,28 +131,51 @@ public class FilesFrame extends javax.swing.JFrame {
                 // Lặp qua 2 cột usernaem với filename
                 for (int col = 0; col < 2; col++) {
                     String fileInfo = (String) jTable1.getValueAt(row, col);
+                    fileInfoToSave = fileInfoToSave + fileInfo + ";;;;;";
+                }
+                fileInfoToSave = fileInfoToSave + ":::::";
+            }
+            choosePathAndRequestToSaveFile(fileInfoToSave);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    void choosePathAndRequestToSaveFile(String fileInfoToSave) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setDialogTitle("Choose a directory to save");
+
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String selectedPath = fileChooser.getSelectedFile().getPath() + "\\";
+            try {
+                ClientFrame.write("request-save-files" + "," + ClientFrame.clientUsername + "," + selectedPath + "," + fileInfoToSave);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+        }
+    }
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int[] selectedRows = jTable1.getSelectedRows();
+
+        String fileToSave = "";
+
+        if (selectedRows.length == 0) {
+            JOptionPane.showMessageDialog(rootPane, "No files selected!");
+        } else {
+            for (int row = 0; row < selectedRows.length; row++) {
+                for (int col = 0; col < 2; col++) {
+                    String fileInfo = (String) jTable1.getValueAt(selectedRows[row], col);
                     fileToSave = fileToSave + fileInfo + ";;;;;";
                 }
                 fileToSave = fileToSave + ":::::";
             }
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            fileChooser.setDialogTitle("Choose a directory to save");
-
-            int result = fileChooser.showOpenDialog(this);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                String selectedPath = fileChooser.getSelectedFile().getPath() + "\\";
-                try {
-                    ClientFrame.write("request-save-all-files" + "," + ClientFrame.clientUsername + "," + selectedPath + "," + fileToSave);
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
-            }
+            choosePathAndRequestToSaveFile(fileToSave);
         }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
