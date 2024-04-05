@@ -550,13 +550,12 @@ public class ClientFrame extends javax.swing.JFrame {
                 FileWriter fileWriter = new FileWriter(selectedPath);
                 fileWriter.write(fileData);
                 fileWriter.close();
+                JOptionPane.showMessageDialog(rootPane, "Saved successfully!");
             } catch (Exception exception) {
                 System.out.println(exception.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
-        JOptionPane.showMessageDialog(rootPane, "Saved successfully!");
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

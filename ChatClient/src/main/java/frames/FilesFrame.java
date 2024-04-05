@@ -153,8 +153,6 @@ public class FilesFrame extends javax.swing.JFrame {
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
     }
 
