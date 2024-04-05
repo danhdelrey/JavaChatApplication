@@ -91,10 +91,10 @@ public class ServerThread implements Runnable {
                     boolean signupStatus = DatabaseConnect.verifySignup(messageSplit[1], messageSplit[2]);
                     if (signupStatus) {
                         write("signup_status" + ServerFrame.splitterString + "successful");
-                        System.out.println("dang ky thanh cong");
+                        
                     } else {
                         write("signup_status" + ServerFrame.splitterString + "failed");
-                        System.out.println("dang ky that bai");
+                        
                     }
                 }
 
@@ -197,7 +197,7 @@ public class ServerThread implements Runnable {
 //            }
 //
 //        } else {
-//            System.out.println("Đường dẫn không tồn tại hoặc không phải là một thư mục.");
+//            
 //        }
         ServerFrame.serverThreadBus.sendFileToPerson(clientUsername, "&:::::&" + allFileData + "&:::::&" + allFilenames + "&:::::&" + pathToSave);
     }

@@ -151,7 +151,7 @@ public class DangKy extends javax.swing.JFrame {
 
         try {
             ClientFrame.write("request_signup" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
-            System.out.println("da gui yeu cau dang ky");
+            
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
@@ -194,7 +194,7 @@ public class DangKy extends javax.swing.JFrame {
 
             try {
                 ClientFrame.write("request_signup" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
-                System.out.println("da gui yeu cau dang ky");
+                
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }

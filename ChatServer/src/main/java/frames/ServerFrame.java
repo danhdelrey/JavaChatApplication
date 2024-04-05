@@ -49,7 +49,7 @@ public class ServerFrame extends javax.swing.JFrame {
         try {
             listener = new ServerSocket(7777);
         } catch (IOException e) {
-            System.out.println(e);
+            
             System.exit(1);
         }
         ThreadPoolExecutor executor = new ThreadPoolExecutor(

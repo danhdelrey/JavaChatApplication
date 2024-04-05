@@ -144,7 +144,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         try {
             ClientFrame.write("request_login" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
-            System.out.println("da gui yeu cau dang nhap");
+            
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
@@ -166,7 +166,7 @@ public class DangNhap extends javax.swing.JFrame {
 
             try {
                 ClientFrame.write("request_login" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
-                System.out.println("da gui yeu cau dang nhap");
+                
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
