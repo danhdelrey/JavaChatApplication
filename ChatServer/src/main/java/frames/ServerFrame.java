@@ -20,9 +20,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class ServerFrame extends javax.swing.JFrame {
 
-    public static volatile ServerThreadBus serverThreadBus; //check
+    public static volatile ServerThreadBus serverThreadBus;
     public static Socket socketOfServer;
-    public static String splitterString = ",";
+    public static String splitterString = ":,;,:";
 
     /**
      * Creates new form ServerFrame
@@ -39,7 +39,7 @@ public class ServerFrame extends javax.swing.JFrame {
         DatabaseConnect.getJDbConnection();
 
         ServerSocket listener = null;
-        serverThreadBus = new ServerThreadBus(); //check
+        serverThreadBus = new ServerThreadBus();
 
         logMessage("Server is waiting to accept user...");
 
@@ -49,7 +49,7 @@ public class ServerFrame extends javax.swing.JFrame {
         try {
             listener = new ServerSocket(7777);
         } catch (IOException e) {
-            
+
             System.exit(1);
         }
         ThreadPoolExecutor executor = new ThreadPoolExecutor(

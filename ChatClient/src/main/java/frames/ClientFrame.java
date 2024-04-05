@@ -32,7 +32,7 @@ public class ClientFrame extends javax.swing.JFrame {
     public static LoginFrame dangNhap;
     public static FilesFrame filesFrame;
 
-    public static String splitterString = ",";
+    public static String splitterString = ":,;,:";
 
     public ClientFrame() {
         initComponents();
@@ -49,7 +49,6 @@ public class ClientFrame extends javax.swing.JFrame {
 
     public void setUpSocket() {
         try {
-
             thread = new Thread() {
                 @Override
                 public void run() {
@@ -60,7 +59,6 @@ public class ClientFrame extends javax.swing.JFrame {
                             // trên máy 'localhost' cổng 7777.
                             if (socketOfClient == null) {
                                 socketOfClient = new Socket("localhost", 7777);
-
                                 // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
                                 os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
                                 // Luồng đầu vào tại Client (Nhận dữ liệu từ server).
@@ -69,7 +67,6 @@ public class ClientFrame extends javax.swing.JFrame {
 
                             String message;
                             while (true) {
-
                                 message = is.readLine();
                                 if (message == null) {
                                     break;
@@ -110,10 +107,8 @@ public class ClientFrame extends javax.swing.JFrame {
                         }
                     } else {
                         try {
-
                             String message;
                             while (true) {
-
                                 message = is.readLine();
                                 if (message == null) {
                                     break;
@@ -152,18 +147,14 @@ public class ClientFrame extends javax.swing.JFrame {
 
                                 }
                                 if (messageSplit[0].equals("get-files")) {
-
                                     String messages[] = message.split("&:::::&");
-
                                     String fileData[] = messages[1].split(";:::::;");
                                     String fileNames[] = messages[2].split(";:::::;");
                                     String pathToSave = messages[3];
-
                                     for (int i = 0; i < fileData.length; i++) {
                                         saveFileToClient(fileData[i], fileNames[i], pathToSave);
                                     }
                                     filesFrame.showMessageDialog("Files are saved successfully.");
-
                                 }
 
                             }
