@@ -71,30 +71,30 @@ public class ServerThread implements Runnable {
                 if (messageSplit[0].equals("send-to-person")) {
                     ServerFrame.serverThreadBus.sendMessageToPerson(messageSplit[2], this.getClientUsername() + " (to you): " + messageSplit[1]);
                 }
-                if (messageSplit[0].equals("request_login")) {
+                if (messageSplit[0].equals("request-login")) {
                     boolean loginStatus = DatabaseConnect.verifyLogin(messageSplit[1], messageSplit[2]);
                     if (loginStatus) {
                         if (!ServerFrame.serverThreadBus.isOnline(messageSplit[1])) {
-                            write("login_status" + ServerFrame.splitterString + "successful");
+                            write("login-status" + ServerFrame.splitterString + "successful");
                             write("get-clientUsername" + ServerFrame.splitterString + messageSplit[1]);
                             this.clientUsername = messageSplit[1];
                             ServerFrame.serverThreadBus.sendOnlineList();
                             ServerFrame.serverThreadBus.mutilCastSend("global-message" + ServerFrame.splitterString + this.getClientUsername() + " has entered the chat.");
                         } else {
-                            write("login_an_online_account" + ServerFrame.splitterString + "true");
+                            write("login-an-online-account" + ServerFrame.splitterString + "true");
                         }
                     } else {
-                        write("login_status" + ServerFrame.splitterString + "failed");
+                        write("login-status" + ServerFrame.splitterString + "failed");
                     }
                 }
-                if (messageSplit[0].equals("request_signup")) {
+                if (messageSplit[0].equals("request-signup")) {
                     boolean signupStatus = DatabaseConnect.verifySignup(messageSplit[1], messageSplit[2]);
                     if (signupStatus) {
-                        write("signup_status" + ServerFrame.splitterString + "successful");
-                        
+                        write("signup-status" + ServerFrame.splitterString + "successful");
+
                     } else {
-                        write("signup_status" + ServerFrame.splitterString + "failed");
-                        
+                        write("signup-status" + ServerFrame.splitterString + "failed");
+
                     }
                 }
 
@@ -174,31 +174,6 @@ public class ServerThread implements Runnable {
             allFilenames = allFilenames + file.getName() + ";:::::;";
         }
 
-//        // Tạo một đối tượng File đại diện cho thư mục
-//        File rootDirectory = new File(directoryPath);
-//        // Kiểm tra xem nó có tồn tại và có phải là thư mục không
-//        if (rootDirectory.exists() && rootDirectory.isDirectory()) {
-//            // Lấy danh sách các tệp trong thư mục
-//            File[] allSenderDirectories = rootDirectory.listFiles();
-//            // Lặp qua từng tệp
-//            if (allSenderDirectories != null) {
-//                for (File senderDirectory : allSenderDirectories) {
-//
-//                    File[] senderFiles = senderDirectory.listFiles();
-//                    if (senderFiles != null) {
-//                        for (File file : senderFiles) {
-//                            allFileData = allFileData + getFileData(file) + ";:::::;";
-//                            allFilenames = allFilenames + file.getName() + ";:::::;";
-//
-//                        }
-//                    }
-//
-//                }
-//            }
-//
-//        } else {
-//            
-//        }
         ServerFrame.serverThreadBus.sendFileToPerson(clientUsername, "&:::::&" + allFileData + "&:::::&" + allFilenames + "&:::::&" + pathToSave);
     }
 

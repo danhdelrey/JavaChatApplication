@@ -75,7 +75,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                     break;
                                 }
                                 String[] messageSplit = message.split(splitterString);
-                                if (messageSplit[0].equals("login_status")) {
+                                if (messageSplit[0].equals("login-status")) {
                                     if (messageSplit[1].equals("successful")) {
                                         dangNhap.setVisible(false);
                                         setClientUsername(dangNhap.getClientUsername());
@@ -87,7 +87,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                         
                                     }
                                 }
-                                if (messageSplit[0].equals("signup_status")) {
+                                if (messageSplit[0].equals("signup-status")) {
                                     if (messageSplit[1].equals("successful")) {
                                         JOptionPane.showMessageDialog(rootPane, "Successfully!");
                                         
@@ -96,7 +96,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                         
                                     }
                                 }
-                                if (messageSplit[0].equals("login_an_online_account")) {
+                                if (messageSplit[0].equals("login-an-online-account")) {
                                     if (messageSplit[1].equals("true")) {
                                         JOptionPane.showMessageDialog(rootPane, "The account is currently online!");
                                     }
