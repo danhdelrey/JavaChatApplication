@@ -67,7 +67,7 @@ public class ServerFrame extends javax.swing.JFrame {
                 socketOfServer = listener.accept();
                 ServerThread serverThread = new ServerThread(socketOfServer); //check
                 serverThreadBus.add(serverThread); //check
-                logMessage("Số thread đang chạy là: " + serverThreadBus.getLength()); //check
+                logMessage("The number of running threads is: " + serverThreadBus.getLength()); //check
                 executor.execute(serverThread);
 
             }

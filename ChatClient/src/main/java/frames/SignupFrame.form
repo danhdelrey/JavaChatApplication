@@ -135,7 +135,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="dangky_B">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng k&#xfd;"/>
+            <Property name="text" type="java.lang.String" value="Register"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dangky_BActionPerformed"/>

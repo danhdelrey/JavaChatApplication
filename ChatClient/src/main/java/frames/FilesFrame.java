@@ -151,7 +151,7 @@ public class FilesFrame extends javax.swing.JFrame {
             try {
                 ClientFrame.write("request-save-files" + ClientFrame.splitterString + ClientFrame.clientUsername + ClientFrame.splitterString + selectedPath + ClientFrame.splitterString + fileInfoToSave);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         }
     }

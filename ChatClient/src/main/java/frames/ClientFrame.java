@@ -80,7 +80,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                         setUpSocket();
 
                                     } else if (messageSplit[1].equals("failed")) {
-                                        JOptionPane.showMessageDialog(rootPane, "Sai tên đăng nhập hoặc mật khẩu!!!");
+                                        JOptionPane.showMessageDialog(rootPane, "Wrong username or password!!!");
 
                                     }
                                 }
@@ -89,7 +89,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                         JOptionPane.showMessageDialog(rootPane, "Successfully!");
 
                                     } else if (messageSplit[1].equals("failed")) {
-                                        JOptionPane.showMessageDialog(rootPane, "Tên tài khoản đã có người sử dụng!");
+                                        JOptionPane.showMessageDialog(rootPane, "The username is already in use!");
 
                                     }
                                 }
@@ -398,7 +398,7 @@ public class ClientFrame extends javax.swing.JFrame {
         String messageContent = jTextField1.getText();
 
         if (messageContent.isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tin nhắn");
+            JOptionPane.showMessageDialog(rootPane, "No message has been entered");
             return;
         }
         if (jComboBox1.getSelectedIndex() == 0) {
@@ -407,7 +407,7 @@ public class ClientFrame extends javax.swing.JFrame {
                 jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         } else {
             try {
@@ -417,7 +417,7 @@ public class ClientFrame extends javax.swing.JFrame {
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         }
         jTextField1.setText("");
@@ -430,7 +430,7 @@ public class ClientFrame extends javax.swing.JFrame {
     private void Send_file_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Send_file_ButtonActionPerformed
         // Hộp thoại chọn file
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Chọn file để gửi");
+        fileChooser.setDialogTitle("Choose files to send");
 
         //Hiển thị hộp thoại chọn file và lưu kết quả vào biến result.
         //Kết quả sẽ là một trong các giá trị sau:
@@ -459,7 +459,7 @@ public class ClientFrame extends javax.swing.JFrame {
                     sendFileMessage(base64FileData, fileName, fileSizeInMB, getCurrentDateTime());
 
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra khi đọc file");
+                    JOptionPane.showMessageDialog(rootPane, "Encountered an error while attempting to read the file.");
                 }
             } else {
                 JOptionPane.showMessageDialog(rootPane, "File has a maximum size of 5MB");
@@ -475,7 +475,7 @@ public class ClientFrame extends javax.swing.JFrame {
                 jTextArea1.setText(jTextArea1.getText() + "You has sent a file: " + fileName + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         } else {
             try {
@@ -485,7 +485,7 @@ public class ClientFrame extends javax.swing.JFrame {
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         }
     }
@@ -503,7 +503,7 @@ public class ClientFrame extends javax.swing.JFrame {
             String formattedDate = date.format(myFormatObj);
 
             if (messageContent.isEmpty()) {
-                JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tin nhắn");
+                JOptionPane.showMessageDialog(rootPane, "No message has been entered");
                 return;
             }
             if (jComboBox1.getSelectedIndex() == 0) {
@@ -512,7 +512,7 @@ public class ClientFrame extends javax.swing.JFrame {
                     jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                    JOptionPane.showMessageDialog(rootPane, "An error occurred");
                 }
             } else {
                 try {
@@ -522,7 +522,7 @@ public class ClientFrame extends javax.swing.JFrame {
                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                    JOptionPane.showMessageDialog(rootPane, "An error occurred");
                 }
             }
             jTextField1.setText("");

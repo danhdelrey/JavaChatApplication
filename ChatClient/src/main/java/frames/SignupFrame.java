@@ -45,7 +45,7 @@ public class SignupFrame extends javax.swing.JFrame {
         nameL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         nameL.setText("Username:");
 
-        dangky_B.setText("Đăng ký");
+        dangky_B.setText("Register");
         dangky_B.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dangky_BActionPerformed(evt);
@@ -131,22 +131,22 @@ public class SignupFrame extends javax.swing.JFrame {
         String password = txtpass.getText();
 
         if (username.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Không được để trống username!!!");
+            JOptionPane.showMessageDialog(rootPane, "Please provide a username!!!");
             return;
         }
 
         if (username.length() > 15) {
-            JOptionPane.showMessageDialog(rootPane, "Username chỉ tối đa 15 kí tự");
+            JOptionPane.showMessageDialog(rootPane, "The username can only be up to 15 characters");
             return;
         }
 
         if (password.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Không được để trống password!!!");
+            JOptionPane.showMessageDialog(rootPane, "Please provide a password!!!");
             return;
         }
 
         if (password.length() < 6) {
-            JOptionPane.showMessageDialog(rootPane, "Mật khẩu phải có ít nhất 6 kí tự");
+            JOptionPane.showMessageDialog(rootPane, "Password must be at least 6 characters long");
             return;
         }
 
@@ -154,7 +154,7 @@ public class SignupFrame extends javax.swing.JFrame {
             ClientFrame.write("request-signup" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            JOptionPane.showMessageDialog(rootPane, "An error occurred");
         }
     }//GEN-LAST:event_dangky_BActionPerformed
 
@@ -174,22 +174,22 @@ public class SignupFrame extends javax.swing.JFrame {
             String password = txtpass.getText();
 
             if (username.length() == 0) {
-                JOptionPane.showMessageDialog(rootPane, "Không được để trống username!!!");
+                JOptionPane.showMessageDialog(rootPane, "Please provide a username!!!");
                 return;
             }
 
             if (username.length() > 15) {
-                JOptionPane.showMessageDialog(rootPane, "Username chỉ tối đa 15 kí tự");
+                JOptionPane.showMessageDialog(rootPane, "The username can only be up to 15 characters");
                 return;
             }
 
             if (password.length() == 0) {
-                JOptionPane.showMessageDialog(rootPane, "Không được để trống password!!!");
+                JOptionPane.showMessageDialog(rootPane, "Please provide a password");
                 return;
             }
 
             if (password.length() < 6) {
-                JOptionPane.showMessageDialog(rootPane, "Mật khẩu phải có ít nhất 6 kí tự");
+                JOptionPane.showMessageDialog(rootPane, "Password must be at least 6 characters long");
                 return;
             }
 
@@ -197,7 +197,7 @@ public class SignupFrame extends javax.swing.JFrame {
                 ClientFrame.write("request-signup" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
 
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         }
     }//GEN-LAST:event_txtpassKeyPressed

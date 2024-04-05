@@ -52,7 +52,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        Login_b.setText("Đăng nhập");
+        Login_b.setText("Login");
         Login_b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Login_bActionPerformed(evt);
@@ -64,7 +64,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        Trans_Dangky.setText("Đăng ký");
+        Trans_Dangky.setText("Create account");
         Trans_Dangky.setBorder(null);
         Trans_Dangky.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,36 +72,36 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Bạn chưa có tài khoản ?");
+        jLabel4.setText("Don't have an account yet?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(Login_b, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(162, 162, 162))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_name)
-                    .addComponent(txt_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(126, 126, 126)
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Trans_Dangky)
-                .addGap(127, 127, 127))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(177, 177, 177))
+                .addGap(139, 139, 139))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_name)
+                            .addComponent(txt_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(Login_b, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +139,7 @@ public class LoginFrame extends javax.swing.JFrame {
         String password = txt_pass.getText();
 
         if (username.length() == 0 || password.length() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Không bỏ trống ô điền");
+            JOptionPane.showMessageDialog(rootPane, "Please fill in the field");
             return;
         }
 
@@ -147,7 +147,7 @@ public class LoginFrame extends javax.swing.JFrame {
             ClientFrame.write("request-login" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+            JOptionPane.showMessageDialog(rootPane, "An error occurred");
         }
     }//GEN-LAST:event_Login_bActionPerformed
 
@@ -161,7 +161,7 @@ public class LoginFrame extends javax.swing.JFrame {
             String password = txt_pass.getText();
 
             if (username.length() == 0 || password.length() == 0) {
-                JOptionPane.showMessageDialog(rootPane, "Không bỏ trống ô điền");
+                JOptionPane.showMessageDialog(rootPane, "Please fill in the field");
                 return;
             }
 
@@ -169,7 +169,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 ClientFrame.write("request-login" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
 
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         }
     }//GEN-LAST:event_txt_passKeyPressed
