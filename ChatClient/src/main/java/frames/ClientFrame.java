@@ -40,6 +40,8 @@ public class ClientFrame extends javax.swing.JFrame {
     public static DangNhap dangNhap;
     public static FilesFrame filesFrame;
 
+    public static String splitterString = ",";
+
     /**
      * Creates new form ClientFrame
      */
@@ -83,7 +85,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                 if (message == null) {
                                     break;
                                 }
-                                String[] messageSplit = message.split(",");
+                                String[] messageSplit = message.split(splitterString);
                                 if (messageSplit[0].equals("login_status")) {
                                     if (messageSplit[1].equals("successful")) {
                                         dangNhap.setVisible(false);
@@ -127,7 +129,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                 if (message == null) {
                                     break;
                                 }
-                                String[] messageSplit = message.split(",");
+                                String[] messageSplit = message.split(splitterString);
                                 if (messageSplit[0].equals("get-clientUsername")) {
                                     setClientUsername(messageSplit[1]);
                                     setClientUsernameTitle();
@@ -421,7 +423,7 @@ public class ClientFrame extends javax.swing.JFrame {
         }
         if (jComboBox1.getSelectedIndex() == 0) {
             try {
-                write("send-to-global" + "," + messageContent + "," + this.clientUsername);
+                write("send-to-global" + splitterString + messageContent + splitterString + this.clientUsername);
                 jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
@@ -430,7 +432,7 @@ public class ClientFrame extends javax.swing.JFrame {
         } else {
             try {
                 String selectedUsername = (String) jComboBox1.getSelectedItem();
-                write("send-to-person" + "," + messageContent + "," + selectedUsername);
+                write("send-to-person" + splitterString + messageContent + splitterString + selectedUsername);
                 jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
@@ -489,7 +491,7 @@ public class ClientFrame extends javax.swing.JFrame {
     private void sendFileMessage(String base64FileData, String fileName, float fileSize, String dateTime) {
         if (jComboBox1.getSelectedIndex() == 0) {
             try {
-                write("send-file-to-global" + "," + base64FileData + "," + this.clientUsername + "," + fileName + "," + fileSize + "," + dateTime);
+                write("send-file-to-global" + splitterString + base64FileData + splitterString + this.clientUsername + splitterString + fileName + splitterString + fileSize + splitterString + dateTime);
                 jTextArea1.setText(jTextArea1.getText() + "You has sent a file: " + fileName + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
@@ -498,7 +500,7 @@ public class ClientFrame extends javax.swing.JFrame {
         } else {
             try {
                 String selectedUsername = (String) jComboBox1.getSelectedItem();
-                write("send-file-to-person" + "," + base64FileData + "," + this.clientUsername + "," + fileName + "," + fileSize + "," + dateTime + "," + selectedUsername);
+                write("send-file-to-person" + splitterString + base64FileData + splitterString + this.clientUsername + splitterString + fileName + splitterString + fileSize + splitterString + dateTime + splitterString + selectedUsername);
                 jTextArea1.setText(jTextArea1.getText() + "You has sent a file (to " + selectedUsername + "): " + fileName + "\n" + getCurrentDateTime() + "\n\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 
@@ -526,7 +528,7 @@ public class ClientFrame extends javax.swing.JFrame {
             }
             if (jComboBox1.getSelectedIndex() == 0) {
                 try {
-                    write("send-to-global" + "," + messageContent + "," + this.clientUsername);
+                    write("send-to-global" + splitterString + messageContent + splitterString + this.clientUsername);
                     jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
                 } catch (IOException ex) {
@@ -535,7 +537,7 @@ public class ClientFrame extends javax.swing.JFrame {
             } else {
                 try {
                     String selectedUsername = (String) jComboBox1.getSelectedItem();
-                    write("send-to-person" + "," + messageContent + "," + selectedUsername);
+                    write("send-to-person" + splitterString + messageContent + splitterString + selectedUsername);
                     jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + formattedDate + "\n\n");
                     jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
 

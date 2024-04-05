@@ -150,7 +150,7 @@ public class DangKy extends javax.swing.JFrame {
         }
 
         try {
-            ClientFrame.write("request_signup" + "," + username + "," + password);
+            ClientFrame.write("request_signup" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
             System.out.println("da gui yeu cau dang ky");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
@@ -164,7 +164,7 @@ public class DangKy extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void dangky_BKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dangky_BKeyPressed
-        
+
     }//GEN-LAST:event_dangky_BKeyPressed
 
     private void txtpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpassKeyPressed
@@ -193,7 +193,7 @@ public class DangKy extends javax.swing.JFrame {
             }
 
             try {
-                ClientFrame.write("request_signup" + "," + username + "," + password);
+                ClientFrame.write("request_signup" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
                 System.out.println("da gui yeu cau dang ky");
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");

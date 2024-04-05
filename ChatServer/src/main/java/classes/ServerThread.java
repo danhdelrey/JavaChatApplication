@@ -64,9 +64,9 @@ public class ServerThread implements Runnable {
                 if (message == null) {
                     break;
                 }
-                String[] messageSplit = message.split(",");
+                String[] messageSplit = message.split(ServerFrame.splitterString);
                 if (messageSplit[0].equals("send-to-global")) {
-                    ServerFrame.serverThreadBus.broadCast(this.getClientUsername(), "global-message" + "," + this.getClientUsername() + ": " + messageSplit[1]);
+                    ServerFrame.serverThreadBus.broadCast(this.getClientUsername(), "global-message" + ServerFrame.splitterString + this.getClientUsername() + ": " + messageSplit[1]);
                 }
                 if (messageSplit[0].equals("send-to-person")) {
                     ServerFrame.serverThreadBus.sendMessageToPerson(messageSplit[2], this.getClientUsername() + " (to you): " + messageSplit[1]);
@@ -75,25 +75,25 @@ public class ServerThread implements Runnable {
                     boolean loginStatus = DatabaseConnect.verifyLogin(messageSplit[1], messageSplit[2]);
                     if (loginStatus) {
                         if (!ServerFrame.serverThreadBus.isOnline(messageSplit[1])) {
-                            write("login_status" + "," + "successful");
-                            write("get-clientUsername" + "," + messageSplit[1]);
+                            write("login_status" + ServerFrame.splitterString + "successful");
+                            write("get-clientUsername" + ServerFrame.splitterString + messageSplit[1]);
                             this.clientUsername = messageSplit[1];
                             ServerFrame.serverThreadBus.sendOnlineList();
-                            ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " has entered the chat.");
+                            ServerFrame.serverThreadBus.mutilCastSend("global-message" + ServerFrame.splitterString + this.getClientUsername() + " has entered the chat.");
                         } else {
-                            write("login_an_online_account" + "," + "true");
+                            write("login_an_online_account" + ServerFrame.splitterString + "true");
                         }
                     } else {
-                        write("login_status" + "," + "failed");
+                        write("login_status" + ServerFrame.splitterString + "failed");
                     }
                 }
                 if (messageSplit[0].equals("request_signup")) {
                     boolean signupStatus = DatabaseConnect.verifySignup(messageSplit[1], messageSplit[2]);
                     if (signupStatus) {
-                        write("signup_status" + "," + "successful");
+                        write("signup_status" + ServerFrame.splitterString + "successful");
                         System.out.println("dang ky thanh cong");
                     } else {
-                        write("signup_status" + "," + "failed");
+                        write("signup_status" + ServerFrame.splitterString + "failed");
                         System.out.println("dang ky that bai");
                     }
                 }
@@ -115,7 +115,7 @@ public class ServerThread implements Runnable {
             ServerFrame.serverThreadBus.remove(clientUsername);
             ServerFrame.logMessage(this.getClientUsername() + " has left the chat.");
             ServerFrame.serverThreadBus.sendOnlineList();
-            ServerFrame.serverThreadBus.mutilCastSend("global-message" + "," + this.getClientUsername() + " has left the chat.");
+            ServerFrame.serverThreadBus.mutilCastSend("global-message" + ServerFrame.splitterString + this.getClientUsername() + " has left the chat.");
         }
     }
 

@@ -149,7 +149,7 @@ public class FilesFrame extends javax.swing.JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             String selectedPath = fileChooser.getSelectedFile().getPath() + "\\";
             try {
-                ClientFrame.write("request-save-files" + "," + ClientFrame.clientUsername + "," + selectedPath + "," + fileInfoToSave);
+                ClientFrame.write("request-save-files" + ClientFrame.splitterString + ClientFrame.clientUsername + ClientFrame.splitterString + selectedPath + ClientFrame.splitterString + fileInfoToSave);
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }

@@ -22,6 +22,7 @@ public class ServerFrame extends javax.swing.JFrame {
 
     public static volatile ServerThreadBus serverThreadBus; //check
     public static Socket socketOfServer;
+    public static String splitterString = ",";
 
     /**
      * Creates new form ServerFrame

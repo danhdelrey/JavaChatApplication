@@ -60,7 +60,7 @@ public class ServerThreadBus {
                 continue;
             } else {
                 try {
-                    serverThread.write("update-file-list" + "," + senderUsername + "," + fileName + "," + fileSize + "," + dateTime + "," + message);
+                    serverThread.write("update-file-list" + ServerFrame.splitterString + senderUsername + ServerFrame.splitterString + fileName + ServerFrame.splitterString + fileSize + ServerFrame.splitterString + dateTime + ServerFrame.splitterString + message);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -72,7 +72,7 @@ public class ServerThreadBus {
         for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
             if (serverThread.getClientUsername().equals(recipientUsername)) {
                 try {
-                    serverThread.write("update-file-list" + "," + senderUsername + "," + fileName + "," + fileSize + "," + dateTime + "," + message);
+                    serverThread.write("update-file-list" + ServerFrame.splitterString + senderUsername + ServerFrame.splitterString + fileName + ServerFrame.splitterString + fileSize + ServerFrame.splitterString + dateTime + ServerFrame.splitterString + message);
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -91,14 +91,14 @@ public class ServerThreadBus {
         for (ServerThread serverThread : threadbus) {
             res += serverThread.getClientUsername() + "-";
         }
-        ServerFrame.serverThreadBus.mutilCastSend("update-online-list" + "," + res);
+        ServerFrame.serverThreadBus.mutilCastSend("update-online-list" + ServerFrame.splitterString + res);
     }
 
     public void sendMessageToPerson(String clientUsername, String message) {
         for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
             if (serverThread.getClientUsername().equals(clientUsername)) {
                 try {
-                    serverThread.write("global-message" + "," + message);
+                    serverThread.write("global-message" + ServerFrame.splitterString + message);
                     break;
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -111,7 +111,7 @@ public class ServerThreadBus {
         for (ServerThread serverThread : ServerFrame.serverThreadBus.getListServerThreads()) {
             if (serverThread.getClientUsername().equals(clientUsername)) {
                 try {
-                    serverThread.write("get-files" + "," + message);
+                    serverThread.write("get-files" + ServerFrame.splitterString + message);
 
                     break;
                 } catch (IOException ex) {
