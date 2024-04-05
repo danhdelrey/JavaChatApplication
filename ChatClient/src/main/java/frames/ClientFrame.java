@@ -29,7 +29,7 @@ public class ClientFrame extends javax.swing.JFrame {
 
     public boolean isLoggedIn = false;
 
-    public static DangNhap dangNhap;
+    public static LoginFrame dangNhap;
     public static FilesFrame filesFrame;
 
     public static String splitterString = ",";
@@ -54,13 +54,13 @@ public class ClientFrame extends javax.swing.JFrame {
                 @Override
                 public void run() {
                     if (isLoggedIn == false) {
-                        dangNhap = new DangNhap();
+                        dangNhap = new LoginFrame();
                         try {
                             // Gửi yêu cầu kết nối tới Server đang lắng nghe
                             // trên máy 'localhost' cổng 7777.
                             if (socketOfClient == null) {
                                 socketOfClient = new Socket("localhost", 7777);
-                                
+
                                 // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
                                 os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
                                 // Luồng đầu vào tại Client (Nhận dữ liệu từ server).
@@ -81,19 +81,19 @@ public class ClientFrame extends javax.swing.JFrame {
                                         setClientUsername(dangNhap.getClientUsername());
                                         successfulLogin();
                                         setUpSocket();
-                                        
+
                                     } else if (messageSplit[1].equals("failed")) {
                                         JOptionPane.showMessageDialog(rootPane, "Sai tên đăng nhập hoặc mật khẩu!!!");
-                                        
+
                                     }
                                 }
                                 if (messageSplit[0].equals("signup-status")) {
                                     if (messageSplit[1].equals("successful")) {
                                         JOptionPane.showMessageDialog(rootPane, "Successfully!");
-                                        
+
                                     } else if (messageSplit[1].equals("failed")) {
                                         JOptionPane.showMessageDialog(rootPane, "Tên tài khoản đã có người sử dụng!");
-                                        
+
                                     }
                                 }
                                 if (messageSplit[0].equals("login-an-online-account")) {
@@ -225,7 +225,7 @@ public class ClientFrame extends javax.swing.JFrame {
             // Lưu file vào đường dẫn đã tạo
             Files.write(filePath, fileData);
         } catch (IOException ex) {
-            
+
         }
     }
 

@@ -29,19 +29,6 @@ public class DatabaseConnect {
 
     }
 
-    //Kiểm tra các thông tin tài khoản người dùng trong Database
-    public static void view_Account() {
-        try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from account");
-            while (rs.next()) {
-                System.out.println("Name: " + rs.getString("username") + "\n" + "Pass: " + rs.getString("password"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     //Kiểm tra xem username đã tồn tại chưa??
     public static boolean isUsernameExist(String username) {
         try {

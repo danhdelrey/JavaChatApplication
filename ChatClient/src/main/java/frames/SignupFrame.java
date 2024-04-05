@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
-public class DangKy extends javax.swing.JFrame {
+public class SignupFrame extends javax.swing.JFrame {
 
-    public DangKy() {
+    public SignupFrame() {
         initComponents();
         this.setVisible(true);
         setLocationRelativeTo(null);
@@ -151,7 +151,7 @@ public class DangKy extends javax.swing.JFrame {
 
         try {
             ClientFrame.write("request-signup" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
-            
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
@@ -194,7 +194,7 @@ public class DangKy extends javax.swing.JFrame {
 
             try {
                 ClientFrame.write("request-signup" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
-                
+
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }

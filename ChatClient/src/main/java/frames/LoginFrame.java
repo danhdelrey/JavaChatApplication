@@ -6,9 +6,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class DangNhap extends javax.swing.JFrame {
+public class LoginFrame extends javax.swing.JFrame {
 
-    public DangNhap() {
+    public LoginFrame() {
         initComponents();
         setLocationRelativeTo(null);
         this.setVisible(true);
@@ -129,7 +129,7 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void Trans_DangkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Trans_DangkyActionPerformed
 
-        DangKy dangKy = new DangKy();
+        SignupFrame dangKy = new SignupFrame();
         this.setVisible(false);
     }//GEN-LAST:event_Trans_DangkyActionPerformed
 
@@ -144,14 +144,14 @@ public class DangNhap extends javax.swing.JFrame {
 
         try {
             ClientFrame.write("request-login" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
-            
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
         }
     }//GEN-LAST:event_Login_bActionPerformed
 
     private void Login_bKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Login_bKeyPressed
-        
+
     }//GEN-LAST:event_Login_bKeyPressed
 
     private void txt_passKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passKeyPressed
@@ -166,7 +166,7 @@ public class DangNhap extends javax.swing.JFrame {
 
             try {
                 ClientFrame.write("request-login" + ClientFrame.splitterString + username + ClientFrame.splitterString + password);
-                
+
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
