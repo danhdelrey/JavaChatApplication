@@ -39,8 +39,8 @@ public class ClientFrame extends javax.swing.JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(false);
-        jTextArea1.setEditable(false);
-        jTextArea2.setEditable(false);
+        Content_Message_TextArea.setEditable(false);
+        Online_list_TextArea.setEditable(false);
         onlineList = new ArrayList<>();
         filesFrame = new FilesFrame();
         setUpSocket();
@@ -132,18 +132,18 @@ public class ClientFrame extends javax.swing.JFrame {
                                         }
 
                                     }
-                                    jTextArea2.setText(online);
+                                    Online_list_TextArea.setText(online);
                                     updateCombobox(onlineList);
                                 }
                                 if (messageSplit[0].equals("global-message")) {
 
-                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n" + getCurrentDateTime() + "\n\n");
-                                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                                    Content_Message_TextArea.setText(Content_Message_TextArea.getText() + messageSplit[1] + "\n" + getCurrentDateTime() + "\n\n");
+                                    Content_Message_TextArea.setCaretPosition(Content_Message_TextArea.getDocument().getLength());
                                 }
                                 if (messageSplit[0].equals("update-file-list")) {
                                     filesFrame.addFileToTable(messageSplit[1], messageSplit[2], Float.parseFloat(messageSplit[3]), messageSplit[4]);
-                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[5] + "\n" + getCurrentDateTime() + "\n\n");
-                                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                                    Content_Message_TextArea.setText(Content_Message_TextArea.getText() + messageSplit[5] + "\n" + getCurrentDateTime() + "\n\n");
+                                    Content_Message_TextArea.setCaretPosition(Content_Message_TextArea.getDocument().getLength());
 
                                 }
                                 if (messageSplit[0].equals("get-files")) {
@@ -235,23 +235,23 @@ public class ClientFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        Send_Message_TextField = new javax.swing.JTextField();
         Send_picture_button = new javax.swing.JButton();
         Send_file_Button = new javax.swing.JButton();
         Receiver_Label = new javax.swing.JLabel();
         clientUsername_ComboBox = new javax.swing.JComboBox<>();
         Online_list_Label = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Online_list_ScrollPane = new javax.swing.JScrollPane();
+        Online_list_TextArea = new javax.swing.JTextArea();
+        Content_Message_ScrollPane = new javax.swing.JScrollPane();
+        Content_Message_TextArea = new javax.swing.JTextArea();
         View_file_button = new javax.swing.JButton();
         Save_chat_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        Send_Message_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField1KeyPressed(evt);
             }
@@ -292,27 +292,27 @@ public class ClientFrame extends javax.swing.JFrame {
         Online_list_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Online_list_Label.setText("Online list");
 
-        jScrollPane3.setBorder(null);
+        Online_list_ScrollPane.setBorder(null);
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jTextArea2.setFocusable(false);
-        jScrollPane3.setViewportView(jTextArea2);
+        Online_list_TextArea.setEditable(false);
+        Online_list_TextArea.setColumns(20);
+        Online_list_TextArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Online_list_TextArea.setLineWrap(true);
+        Online_list_TextArea.setRows(5);
+        Online_list_TextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        Online_list_TextArea.setFocusable(false);
+        Online_list_ScrollPane.setViewportView(Online_list_TextArea);
 
-        jScrollPane2.setBorder(null);
+        Content_Message_ScrollPane.setBorder(null);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 5));
-        jTextArea1.setFocusable(false);
-        jScrollPane2.setViewportView(jTextArea1);
+        Content_Message_TextArea.setEditable(false);
+        Content_Message_TextArea.setColumns(20);
+        Content_Message_TextArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Content_Message_TextArea.setLineWrap(true);
+        Content_Message_TextArea.setRows(5);
+        Content_Message_TextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 5));
+        Content_Message_TextArea.setFocusable(false);
+        Content_Message_ScrollPane.setViewportView(Content_Message_TextArea);
 
         View_file_button.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         View_file_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/file.png"))); // NOI18N
@@ -344,19 +344,19 @@ public class ClientFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clientUsername_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(Save_chat_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Online_list_ScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(View_file_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Online_list_Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Send_Message_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Send_file_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Send_picture_button, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(Content_Message_ScrollPane))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -367,15 +367,15 @@ public class ClientFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Online_list_Label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3)
+                        .addComponent(Online_list_ScrollPane)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(View_file_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Save_chat_button))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Content_Message_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Send_Message_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Send_picture_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Send_file_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -395,7 +395,7 @@ public class ClientFrame extends javax.swing.JFrame {
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String messageContent = jTextField1.getText();
+        String messageContent = Send_Message_TextField.getText();
 
         if (messageContent.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tin nhắn");
@@ -404,8 +404,8 @@ public class ClientFrame extends javax.swing.JFrame {
         if (clientUsername_ComboBox.getSelectedIndex() == 0) {
             try {
                 write("send-to-global" + splitterString + messageContent + splitterString + this.clientUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                Content_Message_TextArea.setText(Content_Message_TextArea.getText() + "You: " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
+                Content_Message_TextArea.setCaretPosition(Content_Message_TextArea.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
@@ -413,14 +413,14 @@ public class ClientFrame extends javax.swing.JFrame {
             try {
                 String selectedUsername = (String) clientUsername_ComboBox.getSelectedItem();
                 write("send-to-person" + splitterString + messageContent + splitterString + selectedUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                Content_Message_TextArea.setText(Content_Message_TextArea.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
+                Content_Message_TextArea.setCaretPosition(Content_Message_TextArea.getDocument().getLength());
 
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
         }
-        jTextField1.setText("");
+        Send_Message_TextField.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -472,8 +472,8 @@ public class ClientFrame extends javax.swing.JFrame {
         if (clientUsername_ComboBox.getSelectedIndex() == 0) {
             try {
                 write("send-file-to-global" + splitterString + base64FileData + splitterString + this.clientUsername + splitterString + fileName + splitterString + fileSize + splitterString + dateTime);
-                jTextArea1.setText(jTextArea1.getText() + "You has sent a file: " + fileName + "\n" + getCurrentDateTime() + "\n\n");
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                Content_Message_TextArea.setText(Content_Message_TextArea.getText() + "You has sent a file: " + fileName + "\n" + getCurrentDateTime() + "\n\n");
+                Content_Message_TextArea.setCaretPosition(Content_Message_TextArea.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
             }
@@ -481,8 +481,8 @@ public class ClientFrame extends javax.swing.JFrame {
             try {
                 String selectedUsername = (String) clientUsername_ComboBox.getSelectedItem();
                 write("send-file-to-person" + splitterString + base64FileData + splitterString + this.clientUsername + splitterString + fileName + splitterString + fileSize + splitterString + dateTime + splitterString + selectedUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You has sent a file (to " + selectedUsername + "): " + fileName + "\n" + getCurrentDateTime() + "\n\n");
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                Content_Message_TextArea.setText(Content_Message_TextArea.getText() + "You has sent a file (to " + selectedUsername + "): " + fileName + "\n" + getCurrentDateTime() + "\n\n");
+                Content_Message_TextArea.setCaretPosition(Content_Message_TextArea.getDocument().getLength());
 
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
@@ -496,7 +496,7 @@ public class ClientFrame extends javax.swing.JFrame {
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String messageContent = jTextField1.getText();
+            String messageContent = Send_Message_TextField.getText();
 
             LocalDateTime date = LocalDateTime.now();
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -509,8 +509,8 @@ public class ClientFrame extends javax.swing.JFrame {
             if (clientUsername_ComboBox.getSelectedIndex() == 0) {
                 try {
                     write("send-to-global" + splitterString + messageContent + splitterString + this.clientUsername);
-                    jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
-                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                    Content_Message_TextArea.setText(Content_Message_TextArea.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
+                    Content_Message_TextArea.setCaretPosition(Content_Message_TextArea.getDocument().getLength());
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
                 }
@@ -518,14 +518,14 @@ public class ClientFrame extends javax.swing.JFrame {
                 try {
                     String selectedUsername = (String) clientUsername_ComboBox.getSelectedItem();
                     write("send-to-person" + splitterString + messageContent + splitterString + selectedUsername);
-                    jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + formattedDate + "\n\n");
-                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                    Content_Message_TextArea.setText(Content_Message_TextArea.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + formattedDate + "\n\n");
+                    Content_Message_TextArea.setCaretPosition(Content_Message_TextArea.getDocument().getLength());
 
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
                 }
             }
-            jTextField1.setText("");
+            Send_Message_TextField.setText("");
         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
@@ -542,7 +542,7 @@ public class ClientFrame extends javax.swing.JFrame {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             String fileName = "backupchat.txt";
-            String fileData = jTextArea1.getText();
+            String fileData = Content_Message_TextArea.getText();
             String selectedPath = fileChooser.getSelectedFile().getPath() + "\\" + fileName;
 
             File file = new File(selectedPath);
@@ -569,10 +569,10 @@ public class ClientFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> clientUsername_ComboBox;
     private javax.swing.JLabel Online_list_Label;
     private javax.swing.JLabel Receiver_Label;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane Content_Message_ScrollPane;
+    private javax.swing.JScrollPane Online_list_ScrollPane;
+    private javax.swing.JTextArea Content_Message_TextArea;
+    private javax.swing.JTextArea Online_list_TextArea;
+    private javax.swing.JTextField Send_Message_TextField;
     // End of variables declaration//GEN-END:variables
 }
