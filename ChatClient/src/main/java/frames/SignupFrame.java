@@ -16,19 +16,19 @@ public class SignupFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        Signup_Panel = new javax.swing.JPanel();
         Dangky_label = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         txtpass = new javax.swing.JTextField();
         passL = new javax.swing.JLabel();
         nameL = new javax.swing.JLabel();
         dangky_B = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        Already_have_acc_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
+        Signup_Panel.setBackground(new java.awt.Color(247, 247, 247));
 
         Dangky_label.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         Dangky_label.setText("SIGN UP");
@@ -57,16 +57,16 @@ public class SignupFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Already have an account?");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Already_have_acc_Button.setText("Already have an account?");
+        Already_have_acc_Button.setBorder(null);
+        Already_have_acc_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(Signup_Panel);
+        Signup_Panel.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -83,7 +83,7 @@ public class SignupFrame extends javax.swing.JFrame {
                                 .addComponent(txtpass))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
-                                .addComponent(jButton1))))
+                                .addComponent(Already_have_acc_Button))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(Dangky_label))
@@ -108,7 +108,7 @@ public class SignupFrame extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(dangky_B)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(Already_have_acc_Button)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -116,11 +116,11 @@ public class SignupFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Signup_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Signup_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -208,8 +208,8 @@ public class SignupFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Dangky_label;
     private javax.swing.JButton dangky_B;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton Already_have_acc_Button;
+    private javax.swing.JPanel Signup_Panel;
     private javax.swing.JLabel nameL;
     private javax.swing.JLabel passL;
     private javax.swing.JTextField txtname;
