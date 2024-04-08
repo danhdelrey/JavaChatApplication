@@ -109,15 +109,22 @@ public class ServerFrame extends javax.swing.JFrame {
     public static void closeServer() {
         //delete all files that clients sent
         String filePath = "./src/main/resources/";
-        File file = new File(filePath);
-        if (file.exists()) {
-            File[] files = file.listFiles();
-            if (files != null) {
-                for (File f : files) {
-                    f.delete();
+        File root = new File(filePath);
+
+        File[] directories = root.listFiles();
+        if (directories != null) {
+            for (File dir : directories) {
+                String[] entries = dir.list();
+                if (entries != null) {
+                    for (String s : entries) {
+                        File currentFile = new File(dir.getPath(), s);
+                        currentFile.delete();
+                    }
                 }
+                dir.delete();
             }
         }
+
         //send message to all clients
         ServerFrame.serverThreadBus.mutilCastSend("server-closed");
     }
