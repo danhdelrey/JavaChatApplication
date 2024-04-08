@@ -29,7 +29,7 @@ public class FilesFrame extends javax.swing.JFrame {
 
     public void addFileToTable(String sender, String fileName, float size, String dateTime) {
         Object row[] = {sender, fileName, size, dateTime};
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel table = (DefaultTableModel) fileListTable.getModel();
         table.addRow(row);
     }
 
@@ -41,15 +41,15 @@ public class FilesFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        fileListScrollPane = new javax.swing.JScrollPane();
+        fileListTable = new javax.swing.JTable();
+        saveAllButton = new javax.swing.JButton();
+        saveTheSelectFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        fileListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -72,22 +72,22 @@ public class FilesFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        fileListTable.setShowGrid(true);
+        fileListScrollPane.setViewportView(fileListTable);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Save all");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveAllButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saveAllButton.setText("Save all");
+        saveAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveAllButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Save the selected files");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        saveTheSelectFile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saveTheSelectFile.setText("Save the selected files");
+        saveTheSelectFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                saveTheSelectFileActionPerformed(evt);
             }
         });
 
@@ -98,12 +98,12 @@ public class FilesFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                    .addComponent(fileListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(saveTheSelectFile)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(saveAllButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -111,26 +111,26 @@ public class FilesFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(saveTheSelectFile)
+                    .addComponent(saveAllButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fileListScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAllButtonActionPerformed
         String fileInfoToSave = "";
-        if (jTable1.getRowCount() == 0) {
+        if (fileListTable.getRowCount() == 0) {
             JOptionPane.showMessageDialog(rootPane, "No files to download!");
         } else {
             // Lặp qua các dòng
-            for (int row = 0; row < jTable1.getRowCount(); row++) {
+            for (int row = 0; row < fileListTable.getRowCount(); row++) {
                 // Lặp qua 2 cột usernaem với filename
                 for (int col = 0; col < 2; col++) {
-                    String fileInfo = (String) jTable1.getValueAt(row, col);
+                    String fileInfo = (String) fileListTable.getValueAt(row, col);
                     fileInfoToSave = fileInfoToSave + fileInfo + ";;;;;";
                 }
                 fileInfoToSave = fileInfoToSave + ":::::";
@@ -138,7 +138,7 @@ public class FilesFrame extends javax.swing.JFrame {
             choosePathAndRequestToSaveFile(fileInfoToSave);
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saveAllButtonActionPerformed
 
     void choosePathAndRequestToSaveFile(String fileInfoToSave) {
         JFileChooser fileChooser = new JFileChooser();
@@ -156,8 +156,8 @@ public class FilesFrame extends javax.swing.JFrame {
         }
     }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int[] selectedRows = jTable1.getSelectedRows();
+    private void saveTheSelectFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTheSelectFileActionPerformed
+        int[] selectedRows = fileListTable.getSelectedRows();
 
         String fileToSave = "";
 
@@ -166,22 +166,22 @@ public class FilesFrame extends javax.swing.JFrame {
         } else {
             for (int row = 0; row < selectedRows.length; row++) {
                 for (int col = 0; col < 2; col++) {
-                    String fileInfo = (String) jTable1.getValueAt(selectedRows[row], col);
+                    String fileInfo = (String) fileListTable.getValueAt(selectedRows[row], col);
                     fileToSave = fileToSave + fileInfo + ";;;;;";
                 }
                 fileToSave = fileToSave + ":::::";
             }
             choosePathAndRequestToSaveFile(fileToSave);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_saveTheSelectFileActionPerformed
 
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane fileListScrollPane;
+    private javax.swing.JTable fileListTable;
+    private javax.swing.JButton saveAllButton;
+    private javax.swing.JButton saveTheSelectFile;
     // End of variables declaration//GEN-END:variables
 }

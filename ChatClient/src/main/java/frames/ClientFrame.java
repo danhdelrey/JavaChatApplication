@@ -39,8 +39,8 @@ public class ClientFrame extends javax.swing.JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(false);
-        jTextArea1.setEditable(false);
-        jTextArea2.setEditable(false);
+        messageTextArea.setEditable(false);
+        onlineListTextarea.setEditable(false);
         onlineList = new ArrayList<>();
         filesFrame = new FilesFrame();
         setUpSocket();
@@ -132,18 +132,18 @@ public class ClientFrame extends javax.swing.JFrame {
                                         }
 
                                     }
-                                    jTextArea2.setText(online);
+                                    onlineListTextarea.setText(online);
                                     updateCombobox(onlineList);
                                 }
                                 if (messageSplit[0].equals("global-message")) {
 
-                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[1] + "\n" + getCurrentDateTime() + "\n\n");
-                                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                                    messageTextArea.setText(messageTextArea.getText() + messageSplit[1] + "\n" + getCurrentDateTime() + "\n\n");
+                                    messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
                                 }
                                 if (messageSplit[0].equals("update-file-list")) {
                                     filesFrame.addFileToTable(messageSplit[1], messageSplit[2], Float.parseFloat(messageSplit[3]), messageSplit[4]);
-                                    jTextArea1.setText(jTextArea1.getText() + messageSplit[5] + "\n" + getCurrentDateTime() + "\n\n");
-                                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                                    messageTextArea.setText(messageTextArea.getText() + messageSplit[5] + "\n" + getCurrentDateTime() + "\n\n");
+                                    messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
 
                                 }
                                 if (messageSplit[0].equals("get-files")) {
@@ -176,12 +176,12 @@ public class ClientFrame extends javax.swing.JFrame {
     }
 
     private void updateCombobox(List<String> onlineList) {
-        jComboBox1.removeAllItems();
-        jComboBox1.addItem("All");
+        receiverComboBox.removeAllItems();
+        receiverComboBox.addItem("All");
         String clientUsername = this.clientUsername;
         for (String e : onlineList) {
             if (!e.equals(clientUsername)) {
-                jComboBox1.addItem(e);
+                receiverComboBox.addItem(e);
             }
         }
 
@@ -235,100 +235,100 @@ public class ClientFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        Send_file_Button = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        messageInput = new javax.swing.JTextField();
+        sentMessageButton = new javax.swing.JButton();
+        sendFileButton = new javax.swing.JButton();
+        toUserLabel = new javax.swing.JLabel();
+        receiverComboBox = new javax.swing.JComboBox<>();
+        onlineListLabel = new javax.swing.JLabel();
+        onlineListScrollPane = new javax.swing.JScrollPane();
+        onlineListTextarea = new javax.swing.JTextArea();
+        messageScrollPane = new javax.swing.JScrollPane();
+        messageTextArea = new javax.swing.JTextArea();
+        viewFileButton = new javax.swing.JButton();
+        saveTheChatButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        messageInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
+                messageInputKeyPressed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/send.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        sentMessageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/send.png"))); // NOI18N
+        sentMessageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                sentMessageButtonActionPerformed(evt);
             }
         });
-        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+        sentMessageButton.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton2KeyPressed(evt);
+                sentMessageButtonKeyPressed(evt);
             }
         });
 
-        Send_file_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/attach-file.png"))); // NOI18N
-        Send_file_Button.addActionListener(new java.awt.event.ActionListener() {
+        sendFileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/attach-file.png"))); // NOI18N
+        sendFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Send_file_ButtonActionPerformed(evt);
+                sendFileButtonActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("To:");
+        toUserLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        toUserLabel.setText("To:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setFocusable(false);
-        jComboBox1.setRequestFocusEnabled(false);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        receiverComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        receiverComboBox.setFocusable(false);
+        receiverComboBox.setRequestFocusEnabled(false);
+        receiverComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                receiverComboBoxActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Online list");
+        onlineListLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        onlineListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        onlineListLabel.setText("Online list");
 
-        jScrollPane3.setBorder(null);
+        onlineListScrollPane.setBorder(null);
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jTextArea2.setFocusable(false);
-        jScrollPane3.setViewportView(jTextArea2);
+        onlineListTextarea.setEditable(false);
+        onlineListTextarea.setColumns(20);
+        onlineListTextarea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        onlineListTextarea.setLineWrap(true);
+        onlineListTextarea.setRows(5);
+        onlineListTextarea.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        onlineListTextarea.setFocusable(false);
+        onlineListScrollPane.setViewportView(onlineListTextarea);
 
-        jScrollPane2.setBorder(null);
+        messageScrollPane.setBorder(null);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 5));
-        jTextArea1.setFocusable(false);
-        jScrollPane2.setViewportView(jTextArea1);
+        messageTextArea.setEditable(false);
+        messageTextArea.setColumns(20);
+        messageTextArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        messageTextArea.setLineWrap(true);
+        messageTextArea.setRows(5);
+        messageTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 5));
+        messageTextArea.setFocusable(false);
+        messageScrollPane.setViewportView(messageTextArea);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/file.png"))); // NOI18N
-        jButton1.setText("View files");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        viewFileButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        viewFileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/file.png"))); // NOI18N
+        viewFileButton.setText("View files");
+        viewFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                viewFileButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chat.png"))); // NOI18N
-        jButton3.setText("Save the chat");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        saveTheChatButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saveTheChatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chat.png"))); // NOI18N
+        saveTheChatButton.setText("Save the chat");
+        saveTheChatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                saveTheChatButtonActionPerformed(evt);
             }
         });
 
@@ -340,23 +340,23 @@ public class ClientFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(toUserLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(receiverComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(saveTheChatButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(onlineListScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(viewFileButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(onlineListLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(messageInput, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Send_file_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sendFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sentMessageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(messageScrollPane))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -365,22 +365,22 @@ public class ClientFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(onlineListLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3)
+                        .addComponent(onlineListScrollPane)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(viewFileButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(saveTheChatButton))
+                    .addComponent(messageScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Send_file_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(messageInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sentMessageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sendFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(receiverComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(toUserLabel)))
                 .addGap(8, 8, 8))
         );
 
@@ -394,40 +394,40 @@ public class ClientFrame extends javax.swing.JFrame {
         return currentDateTime;
     }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String messageContent = jTextField1.getText();
+    private void sentMessageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sentMessageButtonActionPerformed
+        String messageContent = messageInput.getText();
 
         if (messageContent.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "No message has been entered");
             return;
         }
-        if (jComboBox1.getSelectedIndex() == 0) {
+        if (receiverComboBox.getSelectedIndex() == 0) {
             try {
                 write("send-to-global" + splitterString + messageContent + splitterString + this.clientUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                messageTextArea.setText(messageTextArea.getText() + "You: " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
+                messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         } else {
             try {
-                String selectedUsername = (String) jComboBox1.getSelectedItem();
+                String selectedUsername = (String) receiverComboBox.getSelectedItem();
                 write("send-to-person" + splitterString + messageContent + splitterString + selectedUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                messageTextArea.setText(messageTextArea.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + getCurrentDateTime() + "\n\n");
+                messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
 
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         }
-        jTextField1.setText("");
-    }//GEN-LAST:event_jButton2ActionPerformed
+        messageInput.setText("");
+    }//GEN-LAST:event_sentMessageButtonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void receiverComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiverComboBoxActionPerformed
 
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_receiverComboBoxActionPerformed
 
-    private void Send_file_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Send_file_ButtonActionPerformed
+    private void sendFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendFileButtonActionPerformed
         // Hộp thoại chọn file
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Choose files to send");
@@ -466,23 +466,23 @@ public class ClientFrame extends javax.swing.JFrame {
             }
 
         }
-    }//GEN-LAST:event_Send_file_ButtonActionPerformed
+    }//GEN-LAST:event_sendFileButtonActionPerformed
 
     private void sendFileMessage(String base64FileData, String fileName, float fileSize, String dateTime) {
-        if (jComboBox1.getSelectedIndex() == 0) {
+        if (receiverComboBox.getSelectedIndex() == 0) {
             try {
                 write("send-file-to-global" + splitterString + base64FileData + splitterString + this.clientUsername + splitterString + fileName + splitterString + fileSize + splitterString + dateTime);
-                jTextArea1.setText(jTextArea1.getText() + "You has sent a file: " + fileName + "\n" + getCurrentDateTime() + "\n\n");
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                messageTextArea.setText(messageTextArea.getText() + "You has sent a file: " + fileName + "\n" + getCurrentDateTime() + "\n\n");
+                messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         } else {
             try {
-                String selectedUsername = (String) jComboBox1.getSelectedItem();
+                String selectedUsername = (String) receiverComboBox.getSelectedItem();
                 write("send-file-to-person" + splitterString + base64FileData + splitterString + this.clientUsername + splitterString + fileName + splitterString + fileSize + splitterString + dateTime + splitterString + selectedUsername);
-                jTextArea1.setText(jTextArea1.getText() + "You has sent a file (to " + selectedUsername + "): " + fileName + "\n" + getCurrentDateTime() + "\n\n");
-                jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                messageTextArea.setText(messageTextArea.getText() + "You has sent a file (to " + selectedUsername + "): " + fileName + "\n" + getCurrentDateTime() + "\n\n");
+                messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
 
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "An error occurred");
@@ -490,13 +490,13 @@ public class ClientFrame extends javax.swing.JFrame {
         }
     }
 
-    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+    private void sentMessageButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sentMessageButtonKeyPressed
 
-    }//GEN-LAST:event_jButton2KeyPressed
+    }//GEN-LAST:event_sentMessageButtonKeyPressed
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+    private void messageInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messageInputKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String messageContent = jTextField1.getText();
+            String messageContent = messageInput.getText();
 
             LocalDateTime date = LocalDateTime.now();
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -506,35 +506,35 @@ public class ClientFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "No message has been entered");
                 return;
             }
-            if (jComboBox1.getSelectedIndex() == 0) {
+            if (receiverComboBox.getSelectedIndex() == 0) {
                 try {
                     write("send-to-global" + splitterString + messageContent + splitterString + this.clientUsername);
-                    jTextArea1.setText(jTextArea1.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
-                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                    messageTextArea.setText(messageTextArea.getText() + "You: " + messageContent + "\n" + formattedDate + "\n\n");
+                    messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(rootPane, "An error occurred");
                 }
             } else {
                 try {
-                    String selectedUsername = (String) jComboBox1.getSelectedItem();
+                    String selectedUsername = (String) receiverComboBox.getSelectedItem();
                     write("send-to-person" + splitterString + messageContent + splitterString + selectedUsername);
-                    jTextArea1.setText(jTextArea1.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + formattedDate + "\n\n");
-                    jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+                    messageTextArea.setText(messageTextArea.getText() + "You (to " + selectedUsername + "): " + messageContent + "\n" + formattedDate + "\n\n");
+                    messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
 
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(rootPane, "An error occurred");
                 }
             }
-            jTextField1.setText("");
+            messageInput.setText("");
         }
-    }//GEN-LAST:event_jTextField1KeyPressed
+    }//GEN-LAST:event_messageInputKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void viewFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFileButtonActionPerformed
         filesFrame.setVisible(true);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_viewFileButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void saveTheChatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTheChatButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.setDialogTitle("Choose a directory to save");
@@ -542,7 +542,7 @@ public class ClientFrame extends javax.swing.JFrame {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             String fileName = "backupchat.txt";
-            String fileData = jTextArea1.getText();
+            String fileData = messageTextArea.getText();
             String selectedPath = fileChooser.getSelectedFile().getPath() + "\\" + fileName;
 
             File file = new File(selectedPath);
@@ -556,23 +556,23 @@ public class ClientFrame extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_saveTheChatButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Send_file_Button;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField messageInput;
+    private javax.swing.JScrollPane messageScrollPane;
+    private javax.swing.JTextArea messageTextArea;
+    private javax.swing.JLabel onlineListLabel;
+    private javax.swing.JScrollPane onlineListScrollPane;
+    private javax.swing.JTextArea onlineListTextarea;
+    private javax.swing.JComboBox<String> receiverComboBox;
+    private javax.swing.JButton saveTheChatButton;
+    private javax.swing.JButton sendFileButton;
+    private javax.swing.JButton sentMessageButton;
+    private javax.swing.JLabel toUserLabel;
+    private javax.swing.JButton viewFileButton;
     // End of variables declaration//GEN-END:variables
 }

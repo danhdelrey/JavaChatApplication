@@ -16,99 +16,99 @@ public class SignupFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        Dangky_label = new javax.swing.JLabel();
-        txtname = new javax.swing.JTextField();
-        txtpass = new javax.swing.JTextField();
-        passL = new javax.swing.JLabel();
-        nameL = new javax.swing.JLabel();
-        dangky_B = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        signUpPanel = new javax.swing.JPanel();
+        signUpLabel = new javax.swing.JLabel();
+        usernameInputField = new javax.swing.JTextField();
+        passwordInputField = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
+        signUpButton = new javax.swing.JButton();
+        goToLoginButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
+        signUpPanel.setBackground(new java.awt.Color(247, 247, 247));
 
-        Dangky_label.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Dangky_label.setText("SIGN UP");
+        signUpLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        signUpLabel.setText("SIGN UP");
 
-        txtpass.addKeyListener(new java.awt.event.KeyAdapter() {
+        passwordInputField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtpassKeyPressed(evt);
+                passwordInputFieldKeyPressed(evt);
             }
         });
 
-        passL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        passL.setText("Password:");
+        passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        passwordLabel.setText("Password:");
 
-        nameL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        nameL.setText("Username:");
+        usernameLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        usernameLabel.setText("Username:");
 
-        dangky_B.setText("Register");
-        dangky_B.addActionListener(new java.awt.event.ActionListener() {
+        signUpButton.setText("Register");
+        signUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dangky_BActionPerformed(evt);
+                signUpButtonActionPerformed(evt);
             }
         });
-        dangky_B.addKeyListener(new java.awt.event.KeyAdapter() {
+        signUpButton.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                dangky_BKeyPressed(evt);
+                signUpButtonKeyPressed(evt);
             }
         });
 
-        jButton1.setText("Already have an account?");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        goToLoginButton.setText("Already have an account?");
+        goToLoginButton.setBorder(null);
+        goToLoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                goToLoginButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout signUpPanelLayout = new javax.swing.GroupLayout(signUpPanel);
+        signUpPanel.setLayout(signUpPanelLayout);
+        signUpPanelLayout.setHorizontalGroup(
+            signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(signUpPanelLayout.createSequentialGroup()
+                .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(signUpPanelLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(passL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nameL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(passwordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                                .addComponent(txtpass))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(usernameInputField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                                .addComponent(passwordInputField))
+                            .addGroup(signUpPanelLayout.createSequentialGroup()
                                 .addGap(29, 29, 29)
-                                .addComponent(jButton1))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(goToLoginButton))))
+                    .addGroup(signUpPanelLayout.createSequentialGroup()
                         .addGap(149, 149, 149)
-                        .addComponent(Dangky_label))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(signUpLabel))
+                    .addGroup(signUpPanelLayout.createSequentialGroup()
                         .addGap(160, 160, 160)
-                        .addComponent(dangky_B)))
+                        .addComponent(signUpButton)))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        signUpPanelLayout.setVerticalGroup(
+            signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(signUpPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(Dangky_label, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signUpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameL))
+                .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usernameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameLabel))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passL))
+                .addGroup(signUpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwordInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordLabel))
                 .addGap(37, 37, 37)
-                .addComponent(dangky_B)
+                .addComponent(signUpButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(goToLoginButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -116,19 +116,19 @@ public class SignupFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(signUpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(signUpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dangky_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dangky_BActionPerformed
-        String username = txtname.getText();
-        String password = txtpass.getText();
+    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
+        String username = usernameInputField.getText();
+        String password = passwordInputField.getText();
 
         if (username.length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Please provide a username!!!");
@@ -156,22 +156,22 @@ public class SignupFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(rootPane, "An error occurred");
         }
-    }//GEN-LAST:event_dangky_BActionPerformed
+    }//GEN-LAST:event_signUpButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void goToLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToLoginButtonActionPerformed
         // Hiển thị giao diện đăng nhập
         ClientFrame.dangNhap.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_goToLoginButtonActionPerformed
 
-    private void dangky_BKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dangky_BKeyPressed
+    private void signUpButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signUpButtonKeyPressed
 
-    }//GEN-LAST:event_dangky_BKeyPressed
+    }//GEN-LAST:event_signUpButtonKeyPressed
 
-    private void txtpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpassKeyPressed
+    private void passwordInputFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordInputFieldKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String username = txtname.getText();
-            String password = txtpass.getText();
+            String username = usernameInputField.getText();
+            String password = passwordInputField.getText();
 
             if (username.length() == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Please provide a username!!!");
@@ -200,19 +200,19 @@ public class SignupFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "An error occurred");
             }
         }
-    }//GEN-LAST:event_txtpassKeyPressed
+    }//GEN-LAST:event_passwordInputFieldKeyPressed
 
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Dangky_label;
-    private javax.swing.JButton dangky_B;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel nameL;
-    private javax.swing.JLabel passL;
-    private javax.swing.JTextField txtname;
-    private javax.swing.JTextField txtpass;
+    private javax.swing.JButton goToLoginButton;
+    private javax.swing.JTextField passwordInputField;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JButton signUpButton;
+    private javax.swing.JLabel signUpLabel;
+    private javax.swing.JPanel signUpPanel;
+    private javax.swing.JTextField usernameInputField;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
