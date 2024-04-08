@@ -71,6 +71,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                 if (message == null) {
                                     break;
                                 }
+
                                 String[] messageSplit = message.split(splitterString);
                                 if (messageSplit[0].equals("login-status")) {
                                     if (messageSplit[1].equals("successful")) {
@@ -112,6 +113,10 @@ public class ClientFrame extends javax.swing.JFrame {
                                 message = is.readLine();
                                 if (message == null) {
                                     break;
+                                }
+                                if (message.equals("server-closed")) {
+                                    JOptionPane.showMessageDialog(rootPane, "Server is closed!", "Warning", JOptionPane.WARNING_MESSAGE);
+                                    System.exit(0);
                                 }
                                 String[] messageSplit = message.split(splitterString);
                                 if (messageSplit[0].equals("get-clientUsername")) {
@@ -158,9 +163,7 @@ public class ClientFrame extends javax.swing.JFrame {
                                 }
 
                             }
-//                    os.close();
-//                    is.close();
-//                    socketOfClient.close();
+
                         } catch (UnknownHostException e) {
                             return;
                         } catch (IOException e) {

@@ -7,12 +7,15 @@ package frames;
 import classes.DatabaseConnect;
 import classes.ServerThread;
 import classes.ServerThreadBus;
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,6 +43,22 @@ public class ServerFrame extends javax.swing.JFrame {
 
         ServerSocket listener = null;
         serverThreadBus = new ServerThreadBus();
+
+        //server closing event
+        serverFrame.addWindowListener(
+                new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent
+            ) {
+                if (JOptionPane.showConfirmDialog(serverFrame, "Are you sure you want to close this server?", "Close Server?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    closeServer();
+                    System.exit(0);
+                } else {
+                    serverFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                }
+            }
+        }
+        );
 
         logMessage("Server is waiting to accept user...");
 
@@ -85,6 +104,22 @@ public class ServerFrame extends javax.swing.JFrame {
 
     public static void logMessage(String message) {
         contentTextArea.setText(contentTextArea.getText() + message + "\n");
+    }
+
+    public static void closeServer() {
+        //delete all files that clients sent
+        String filePath = "./src/main/resources/";
+        File file = new File(filePath);
+        if (file.exists()) {
+            File[] files = file.listFiles();
+            if (files != null) {
+                for (File f : files) {
+                    f.delete();
+                }
+            }
+        }
+        //send message to all clients
+        ServerFrame.serverThreadBus.mutilCastSend("server-closed");
     }
 
     /**
